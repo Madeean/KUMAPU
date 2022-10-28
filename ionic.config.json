@@ -1,0 +1,7 @@
+{
+  "name": "kumapu",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
