@@ -1,0 +1,29 @@
+ion-content {
+  --background: linear-gradient(
+    rgba(7, 163, 178, 1) 0%,
+    rgba(80, 213, 183, 0.7) 50%,
+    rgba(172, 192, 254, 0.7) 100%
+  );
+}
+/* .vertical-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 96%;
+}
+.text-bawah {
+  position: absolute;
+  margin-top: 22%;
+  width: 100%;
+} */
+
+.container {
+  display: grid;
+  place-items: center;
+  height: 600px;
+}
+
+.text-gede {
+  font-size: 50px;
+  color: #aebaf8;
+}

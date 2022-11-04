@@ -20,15 +20,19 @@ import "@ionic/react/css/display.css";
 
 /* Theme variables */
 import "./theme/variables.css";
+import SplashScreen from "./splash/SplashScreen";
+import Login from "./auth/Login";
 
 setupIonicReact();
 
 const App: React.FC = () => (
   <IonApp>
-    {/* <IonReactRouter>
-      <IonRouterOutlet></IonRouterOutlet>
-    </IonReactRouter> */}
-    <h1>hello world</h1>
+    <IonReactRouter>
+      <IonRouterOutlet>
+        <Route path="/" component={SplashScreen} exact />
+        <Route path="/login" component={Login} exact />
+      </IonRouterOutlet>
+    </IonReactRouter>
   </IonApp>
 );
 
