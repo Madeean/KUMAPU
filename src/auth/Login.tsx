@@ -1,10 +1,12 @@
 import React from "react";
-import { IonPage } from "@ionic/react";
+import { IonCard, IonPage, IonText, IonTitle } from "@ionic/react";
 
 const Login: React.FC = () => {
   return (
     <IonPage>
-      <h1>login page</h1>
+      <IonCard>
+        <IonText>Login Duls</IonText>
+      </IonCard>
     </IonPage>
   );
 };
