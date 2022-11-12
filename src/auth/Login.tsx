@@ -37,7 +37,7 @@ const Login: React.FC = () => {
           <IonItemDivider />
           <IonText>Don't have an account?</IonText>
           <IonItem>
-            <IonButton>Register</IonButton>
+            <IonButton routerLink="/register">Register</IonButton>
           </IonItem>
         </IonCard>
       </IonContent>
