@@ -1,4 +1,22 @@
-.logo-image{
-    width: 100px;
-    height: 100px;
+.logo-image {
+  width: 100px;
+  height: 100px;
+}
+
+ion-content {
+  --background: linear-gradient(
+    rgba(7, 163, 178, 1) 0%,
+    rgba(80, 213, 183, 0.7) 50%,
+    rgba(172, 192, 254, 0.7) 100%
+  );
+}
+ion-card,
+ion-item,
+ion-item-divider {
+  --background: transparent;
+}
+.card {
+  display: grid;
+  place-items: center;
+  height: 600px;
 }

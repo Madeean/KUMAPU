@@ -19,8 +19,8 @@ const Login: React.FC = () => {
   return (
     <IonPage>
       <IonContent>
-        <IonCard class="ion-text-center">
-          <IonItem>
+        <IonCard className="ion-text-center card">
+          <IonItem className="item">
             <IonImg src={logo} alt="centered" class="logo-image" />
           </IonItem>
           <IonItem>
