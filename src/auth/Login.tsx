@@ -25,11 +25,11 @@ const Login: React.FC = () => {
           </IonItem>
           <IonItem>
             <IonLabel position="floating">Email</IonLabel>
-            <IonInput />
+            <IonInput type="email" />
           </IonItem>
           <IonItem>
             <IonLabel position="floating">Password</IonLabel>
-            <IonInput />
+            <IonInput type="password" />
           </IonItem>
           <IonItem>
             <IonButton>Login</IonButton>
