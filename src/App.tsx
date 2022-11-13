@@ -23,6 +23,7 @@ import "./theme/variables.css";
 import SplashScreen from "./splash/SplashScreen";
 import Login from "./auth/Login";
 import Register from "./auth/Register";
+import PengontrakTab from "./pengontrak/PengontrakTab";
 
 setupIonicReact();
 
@@ -33,6 +34,7 @@ const App: React.FC = () => (
         <Route path="/" component={SplashScreen} exact />
         <Route path="/login" component={Login} exact />
         <Route path="/register" component={Register} exact />
+        <Route path="/pengontrak" component={PengontrakTab} />
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>

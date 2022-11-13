@@ -1,17 +1,24 @@
 import React from "react";
 import {
+  IonBackButton,
+  IonButton,
+  IonButtons,
   IonContent,
+  IonHeader,
+  IonIcon,
   IonItem,
   IonList,
   IonPage,
   IonSelect,
   IonSelectOption,
   IonText,
+  IonToolbar,
 } from "@ionic/react";
 
 import "./Register.css";
 import RegisterPemilikKontrakan from "./Components/RegisterPemilikKontrakan";
 import RegisterPengontrak from "./Components/RegisterPengontrak";
+import { arrowBack } from "ionicons/icons";
 
 const Register: React.FC = () => {
   const [registerType, setRegisterType] = React.useState<string>("");
@@ -19,7 +26,6 @@ const Register: React.FC = () => {
   return (
     <IonPage>
       <IonContent className="ion-padding ion-text-center">
-        <IonText>Select Register Type</IonText>
         <IonList className="container-register">
           <IonItem>
             <IonSelect

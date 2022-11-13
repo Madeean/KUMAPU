@@ -68,7 +68,10 @@ const RegisterPengontrak: React.FC = () => {
             <IonButton color="favorite">Gallery</IonButton>
           </div>
 
-          <IonButton className="ion-margin-top btnregister-register-pengontrak">
+          <IonButton
+            className="ion-margin-top btnregister-register-pengontrak"
+            routerLink="/pengontrak"
+          >
             Register
           </IonButton>
         </IonCol>

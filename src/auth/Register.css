@@ -6,3 +6,11 @@
 gantiWarna-register {
   color: #000 !important;
 }
+.icon-register {
+  width: 40px;
+  height: 40px;
+}
+
+.gantiwarna {
+  --background: #000;
+}
