@@ -39,7 +39,7 @@ const PengontrakTab: React.FC = () => {
           component={PengontrakEditProfile}
         />
       </IonRouterOutlet>
-      <IonTabBar slot="bottom">
+      <IonTabBar slot="bottom" color="medium">
         <IonTabButton tab="home" href="/pengontrak/home">
           <IonIcon icon={home} />
           <IonLabel>Home</IonLabel>

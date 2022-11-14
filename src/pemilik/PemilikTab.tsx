@@ -28,7 +28,7 @@ const PemilikTab: React.FC = () => {
           component={pemilikEditProfile}
         />
       </IonRouterOutlet>
-      <IonTabBar slot="bottom">
+      <IonTabBar slot="bottom" color="medium">
         <IonTabButton tab="home" href="/pemilik/home">
           <IonIcon icon={home} />
           <IonLabel>Home</IonLabel>
