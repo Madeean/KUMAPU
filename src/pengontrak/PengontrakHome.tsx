@@ -1,10 +1,11 @@
+import { IonPage } from "@ionic/react";
 import React from "react";
 
 const PengontrakHome: React.FC = () => {
   return (
-    <div>
-      <h1>Ini Pengontrak Home</h1>
-    </div>
+    <IonPage>
+      <h1>Home</h1>
+    </IonPage>
   );
 };
 

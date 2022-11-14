@@ -16,7 +16,7 @@ ion-content {
   margin-top: 22%;
   width: 100%;
 } */
-
+@import url("https://fonts.googleapis.com/css2?family=Russo+One&display=swap");
 .container {
   display: grid;
   place-items: center;
@@ -24,7 +24,7 @@ ion-content {
 }
 
 .text-gede {
-  font-family: "Russo One", sans-serif;
+  font-family: "Russo One", sans-serif !important;
   font-size: 50px;
   color: #aebaf8;
 }
