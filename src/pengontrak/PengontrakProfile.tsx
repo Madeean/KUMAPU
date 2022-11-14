@@ -28,17 +28,17 @@ const PengontrakProfile: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <IonGrid>
+        <IonGrid fixed={true}>
           <IonRow>
-            <IonCol>
+            <IonCol size="2">
               <img src={ProfilePage} className="image-pengontrak-profile" />
             </IonCol>
-            <IonCol>
+            <IonCol className="nama-pengontrak-profile" size="8">
               <IonTitle>Made Reihan</IonTitle>
               <IonTitle>+629243423</IonTitle>
               <IonTitle>Made@gmail.com</IonTitle>
             </IonCol>
-            <IonCol size="auto">
+            <IonCol size="2">
               <IonButtons>
                 <IonButton className="btn-edit-pengontrak-profile">
                   <IonIcon
