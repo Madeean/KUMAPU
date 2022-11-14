@@ -1,28 +1,28 @@
-.profile-text-pengontrak-profile {
+.profile-text-pemilik-profile {
   color: black;
   font-family: "Russo One", sans-serif;
 }
 
-.image-pengontrak-profile {
+.image-pemilik-profile {
   border-radius: 50%;
   width: 100px;
   height: 100px;
 }
 
-.ion-icon-pengontrak-profile {
+.ion-icon-pemilik-profile {
   width: 50px;
   height: 50px;
 }
-.btn-edit-pengontrak-profile {
+.btn-edit-pemilik-profile {
   width: 50px;
   height: 50px;
 }
 
-.btn-logout-pengontrak-profile {
+.btn-logout-pemilik-profile {
   margin-top: 50px;
   display: grid;
   place-items: center;
 }
-.nama-pengontrak-profile {
+.nama-pemilik-profile {
   place-items: left;
 }

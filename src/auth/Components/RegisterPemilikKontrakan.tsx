@@ -37,7 +37,9 @@ const RegisterPemilikKontrakan: React.FC = () => {
             <IonInput type="password" />
           </IonItem>
 
-          <IonButton className="ion-margin-top">Register</IonButton>
+          <IonButton routerLink="/pemilik" className="ion-margin-top">
+            Register
+          </IonButton>
         </IonCol>
       </IonRow>
     </IonGrid>
