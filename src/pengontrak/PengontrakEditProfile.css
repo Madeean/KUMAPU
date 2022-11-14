@@ -1,0 +1,18 @@
+.profile-text-pengontrak-edit-profile {
+  color: black;
+  font-family: "Russo One", sans-serif;
+}
+
+.background-pengontrak-edit-profile {
+  --background: linear-gradient(
+    rgba(7, 163, 178, 1) 0%,
+    rgba(80, 213, 183, 0.7) 50%,
+    rgba(172, 192, 254, 0.7) 100%
+  );
+}
+
+.btn-edit-profile-pengontrak {
+  margin-top: 50px;
+  display: grid;
+  place-items: center;
+}

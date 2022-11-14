@@ -40,7 +40,10 @@ const PengontrakProfile: React.FC = () => {
             </IonCol>
             <IonCol size="2">
               <IonButtons>
-                <IonButton className="btn-edit-pengontrak-profile">
+                <IonButton
+                  className="btn-edit-pengontrak-profile"
+                  routerLink="/pengontrak/profile/edit"
+                >
                   <IonIcon
                     src={pencil}
                     className="ion-icon-pengontrak-profile"

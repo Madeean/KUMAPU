@@ -1,10 +1,11 @@
+import { IonPage } from "@ionic/react";
 import React from "react";
 
 const PengontrakPermintaanPembayaran: React.FC = () => {
   return (
-    <div>
-      <h1>Ini Pengontrak Permintaan Pembayaran</h1>
-    </div>
+    <IonPage>
+      <h1>permintaan pembayaran</h1>
+    </IonPage>
   );
 };
 
