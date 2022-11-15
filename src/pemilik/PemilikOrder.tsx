@@ -17,7 +17,13 @@ import React from "react";
 import GRIDpemilikOrder from "./components/GRIDpemilikOrder";
 
 import "./PemilikOrder.css";
+import { useHistory } from "react-router";
 const PemilikOrder: React.FC = () => {
+  const history = useHistory();
+  const pindahTambahPembayaran = () => {};
+  const pindahDaftarOrangNgontrak = () => {
+    history.push("/pemilik/order/daftarorangngontrak");
+  };
   return (
     <IonPage>
       <IonHeader>
@@ -29,10 +35,23 @@ const PemilikOrder: React.FC = () => {
       </IonHeader>
       <IonContent>
         <IonGrid className="title-GRIDPemilikOrder">
-          <GRIDpemilikOrder icon="add" title="Tambah Pembayaran" />
-          <GRIDpemilikOrder icon="checkmarkCircle" title="Daftar Belum Lunas" />
-          <GRIDpemilikOrder icon="list" title="Daftar Orang Ngontrak" />
           <GRIDpemilikOrder
+            onClick={pindahTambahPembayaran}
+            icon="add"
+            title="Tambah Pembayaran"
+          />
+          <GRIDpemilikOrder
+            onClick={pindahTambahPembayaran}
+            icon="checkmarkCircle"
+            title="Daftar Belum Lunas"
+          />
+          <GRIDpemilikOrder
+            onClick={pindahDaftarOrangNgontrak}
+            icon="list"
+            title="Daftar Orang Ngontrak"
+          />
+          <GRIDpemilikOrder
+            onClick={pindahTambahPembayaran}
             icon="closeCircle"
             title="Daftar Belum Bayar Bulanan"
           />

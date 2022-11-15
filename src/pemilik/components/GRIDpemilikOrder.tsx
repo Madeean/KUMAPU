@@ -10,7 +10,11 @@ import {
 import React from "react";
 import "./GRIDpemilikOrder.css";
 
-const GRIDpemilikOrder: React.FC<{ title: string; icon: string }> = (props) => {
+const GRIDpemilikOrder: React.FC<{
+  title: string;
+  icon: string;
+  onClick: () => void;
+}> = (props) => {
   const checkIcon = () => {
     if (props.icon === "add") {
       return add;
@@ -25,7 +29,7 @@ const GRIDpemilikOrder: React.FC<{ title: string; icon: string }> = (props) => {
 
   return (
     <div className="pembungkus-grid-pemilik-order">
-      <IonRow>
+      <IonRow onClick={props.onClick}>
         <IonCol size="1">
           <IonIcon icon={checkIcon()} />
         </IonCol>

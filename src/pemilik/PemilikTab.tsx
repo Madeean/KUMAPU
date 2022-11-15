@@ -9,6 +9,7 @@ import {
 import { documentText, home, person } from "ionicons/icons";
 import React from "react";
 import { Redirect, Route } from "react-router";
+import PemilikDaftarOrangNgontrak from "./PemilikDaftarOrangNgontrak";
 import pemilikEditProfile from "./PemilikEditProfile";
 import PemilikHome from "./PemilikHome";
 import PemilikOrder from "./PemilikOrder";
@@ -22,6 +23,11 @@ const PemilikTab: React.FC = () => {
         <Route exact path="/pemilik/home" component={PemilikHome} />
         <Route exact path="/pemilik/order" component={PemilikOrder} />
         <Route exact path="/pemilik/profile" component={PemilikProfile} />
+        <Route
+          exact
+          path="/pemilik/order/daftarorangngontrak"
+          component={PemilikDaftarOrangNgontrak}
+        />
         <Route
           exact
           path="/pemilik/profile/edit"
