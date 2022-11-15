@@ -1,19 +1,39 @@
 import { IonCol, IonIcon, IonRow, IonTitle } from "@ionic/react";
-import { addCircle, pencil } from "ionicons/icons";
+import {
+  addCircle,
+  add,
+  checkmarkCircle,
+  list,
+  closeCircle,
+  arrowForward,
+} from "ionicons/icons";
 import React from "react";
+import "./GRIDpemilikOrder.css";
 
-const GRIDpemilikOrder: React.FC = () => {
+const GRIDpemilikOrder: React.FC<{ title: string; icon: string }> = (props) => {
+  const checkIcon = () => {
+    if (props.icon === "add") {
+      return add;
+    } else if (props.icon === "checkmarkCircle") {
+      return checkmarkCircle;
+    } else if (props.icon === "list") {
+      return list;
+    } else if (props.icon === "closeCircle") {
+      return closeCircle;
+    }
+  };
+
   return (
     <div className="pembungkus-grid-pemilik-order">
       <IonRow>
-        <IonCol size="2">
-          <IonIcon icon={pencil} />
+        <IonCol size="1">
+          <IonIcon icon={checkIcon()} />
         </IonCol>
-        <IonCol size="8">
-          <IonTitle>Tambah Pembayaran</IonTitle>
+        <IonCol size="10">
+          <IonTitle>{props.title}</IonTitle>
         </IonCol>
-        <IonCol size="2">
-          <IonIcon icon={addCircle} />
+        <IonCol size="1">
+          <IonIcon icon={arrowForward} />
         </IonCol>
       </IonRow>
     </div>

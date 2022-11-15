@@ -28,10 +28,14 @@ const PemilikOrder: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <IonGrid>
-          <GRIDpemilikOrder />
-          <GRIDpemilikOrder />
-          <GRIDpemilikOrder />
+        <IonGrid className="title-GRIDPemilikOrder">
+          <GRIDpemilikOrder icon="add" title="Tambah Pembayaran" />
+          <GRIDpemilikOrder icon="checkmarkCircle" title="Daftar Belum Lunas" />
+          <GRIDpemilikOrder icon="list" title="Daftar Orang Ngontrak" />
+          <GRIDpemilikOrder
+            icon="closeCircle"
+            title="Daftar Belum Bayar Bulanan"
+          />
         </IonGrid>
       </IonContent>
     </IonPage>
