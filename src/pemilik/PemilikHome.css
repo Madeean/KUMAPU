@@ -1,0 +1,33 @@
+@import url("https://fonts.googleapis.com/css2?family=Russo+One&display=swap");
+.title-pengontrak-home {
+  color: black;
+
+  font-family: "Russo One", sans-serif !important;
+}
+
+.btn-riwayat-pengontrak-home {
+  background-color: #50d5b7;
+  width: 150px;
+  border-radius: 50px;
+  font-family: "Russo One", sans-serif !important;
+}
+
+.pembayaran-terbaru-pengontrak-home {
+  font-family: "Russo One", sans-serif !important;
+}
+
+.card-pengontrak-home {
+  font-family: "Russo One", sans-serif !important;
+  background-color: #50d5b7;
+  border-radius: 20px;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.btn-tambah-pembayaran-pengontrak-home {
+  font-family: "Russo One", sans-serif !important;
+  --background: transparent !important;
+  --background-activated: transparent !important;
+  --box-shadow: none !important;
+  --color: #000 !important;
+}

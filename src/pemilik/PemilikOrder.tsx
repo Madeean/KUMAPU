@@ -1,18 +1,21 @@
 import {
   IonButton,
   IonButtons,
+  IonCard,
+  IonCardContent,
   IonCol,
   IonContent,
   IonGrid,
   IonHeader,
   IonIcon,
   IonItem,
+  IonLabel,
   IonPage,
   IonRow,
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import { addCircle, pencil } from "ionicons/icons";
+import { addCircle, pencil, star } from "ionicons/icons";
 import React from "react";
 import GRIDpemilikOrder from "./components/GRIDpemilikOrder";
 
