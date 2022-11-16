@@ -1,0 +1,12 @@
+.navbar-detail-transaksi-pengontrak {
+  color: #000;
+}
+.card-gambar-detail-transaksi {
+  box-shadow: none;
+}
+.informasi-detail-transaksi-pengontrak {
+  background-color: lightgray;
+  margin-left: 1%;
+  margin-right: 1%;
+  margin-bottom: 1%;
+}

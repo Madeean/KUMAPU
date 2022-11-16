@@ -16,6 +16,7 @@ import {
 } from "ionicons/icons";
 import React from "react";
 import { Redirect, Route } from "react-router";
+import PengontrakDetailTransaksi from "./PengontrakDetailTransaksi";
 import PengontrakEditProfile from "./PengontrakEditProfile";
 import PengontrakHome from "./PengontrakHome";
 import PengontrakPembayaranBerhasil from "./PengontrakPembayaranBerhasil";
@@ -55,6 +56,11 @@ const PengontrakTab: React.FC = () => {
           exact
           path="/pengontrak/pembayaran-berhasil"
           component={PengontrakPembayaranBerhasil}
+        />
+        <Route
+          exact
+          path="/pengontrak/detail-transaksi"
+          component={PengontrakDetailTransaksi}
         />
       </IonRouterOutlet>
 

@@ -81,7 +81,9 @@ const PengontrakHome: React.FC = () => {
                   <IonTitle>Kampung dadap</IonTitle>
                 </IonCol>
                 <IonCol className="ion-text-center">
-                  <IonButton>Detail transaksi</IonButton>
+                  <IonButton routerLink="/pengontrak/detail-transaksi">
+                    Detail transaksi
+                  </IonButton>
                 </IonCol>
               </IonRow>
               <IonTitle className="ion-text-center">25-10-2022</IonTitle>
