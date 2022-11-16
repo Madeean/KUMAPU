@@ -20,6 +20,7 @@ import PengontrakEditProfile from "./PengontrakEditProfile";
 import PengontrakHome from "./PengontrakHome";
 import PengontrakPermintaanPembayaran from "./PengontrakPermintaanPembayaran";
 import PengontrakProfile from "./PengontrakProfile";
+import PengontrakRiwayatPembayaran from "./PengontrakRiwayatPembayaran";
 
 const PengontrakTab: React.FC = () => {
   return (
@@ -38,7 +39,13 @@ const PengontrakTab: React.FC = () => {
           path="/pengontrak/profile/edit"
           component={PengontrakEditProfile}
         />
+        <Route
+          exact
+          path="/pengontrak/riwayat-pembayaran"
+          component={PengontrakRiwayatPembayaran}
+        />
       </IonRouterOutlet>
+
       <IonTabBar slot="bottom" color="medium">
         <IonTabButton tab="home" href="/pengontrak/home">
           <IonIcon icon={home} />

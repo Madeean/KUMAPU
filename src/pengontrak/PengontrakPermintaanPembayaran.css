@@ -1,0 +1,12 @@
+.card-permintaan-pembayaran-pengontrak {
+  background: #50d5b7;
+  border-radius: 10px;
+  margin-left: 1%;
+  margin-right: 1%;
+  font-family: "Russo One", sans-serif !important;
+}
+
+.title-permintaan-pembayaran-pengontrak {
+  font-family: "Russo One", sans-serif !important;
+  color: black;
+}
