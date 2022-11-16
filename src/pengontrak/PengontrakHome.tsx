@@ -16,10 +16,16 @@ import {
 } from "@ionic/react";
 import { add, refresh } from "ionicons/icons";
 import React from "react";
+import { useHistory } from "react-router";
 import tambahBayar from "../pengontrak/PengontrakPermintaanPembayaran";
 import "./PengontrakHome.css";
 
 const PengontrakHome: React.FC = () => {
+  const history = useHistory();
+  const pindahRiwayatPembayaran = () => {
+    history.push("/pengontrak/riwayat-pembayaran");
+  };
+
   return (
     <>
       <IonPage>
@@ -44,7 +50,7 @@ const PengontrakHome: React.FC = () => {
               </IonCol>
               <IonCol>
                 <div className="btn-riwayat-pengontrak-home">
-                  <IonButtons slot="center">
+                  <IonButtons onClick={pindahRiwayatPembayaran} slot="center">
                     <IonIcon src={refresh} />
                     <IonTitle>Riwayat</IonTitle>
                   </IonButtons>
@@ -86,7 +92,10 @@ const PengontrakHome: React.FC = () => {
             <IonGrid>
               <IonRow className="ion-align-items-center">
                 <IonCol className="ion-text-center">
-                  <IonButton className="btn-tambah-pembayaran-pengontrak-home">
+                  <IonButton
+                    className="btn-tambah-pembayaran-pengontrak-home"
+                    routerLink="/pengontrak/tambah-pembayaran"
+                  >
                     <IonIcon src={add} />
                     <IonTitle>Tambah Pembayaran</IonTitle>
                   </IonButton>

@@ -18,8 +18,11 @@ import React from "react";
 import { Redirect, Route } from "react-router";
 import PengontrakEditProfile from "./PengontrakEditProfile";
 import PengontrakHome from "./PengontrakHome";
+import PengontrakPembayaranBerhasil from "./PengontrakPembayaranBerhasil";
 import PengontrakPermintaanPembayaran from "./PengontrakPermintaanPembayaran";
 import PengontrakProfile from "./PengontrakProfile";
+import PengontrakRiwayatPembayaran from "./PengontrakRiwayatPembayaran";
+import PengontrakTambahPembayaran from "./PengontrakTambahPembayaran";
 
 const PengontrakTab: React.FC = () => {
   return (
@@ -38,7 +41,23 @@ const PengontrakTab: React.FC = () => {
           path="/pengontrak/profile/edit"
           component={PengontrakEditProfile}
         />
+        <Route
+          exact
+          path="/pengontrak/riwayat-pembayaran"
+          component={PengontrakRiwayatPembayaran}
+        />
+        <Route
+          exact
+          path="/pengontrak/tambah-pembayaran"
+          component={PengontrakTambahPembayaran}
+        />
+        <Route
+          exact
+          path="/pengontrak/pembayaran-berhasil"
+          component={PengontrakPembayaranBerhasil}
+        />
       </IonRouterOutlet>
+
       <IonTabBar slot="bottom" color="medium">
         <IonTabButton tab="home" href="/pengontrak/home">
           <IonIcon icon={home} />
