@@ -1,6 +1,11 @@
 import {
   IonButton,
   IonButtons,
+  IonCard,
+  IonCardContent,
+  IonCardHeader,
+  IonCardSubtitle,
+  IonCardTitle,
   IonCol,
   IonContent,
   IonGrid,
@@ -51,8 +56,56 @@ const PemilikHome: React.FC = () => {
               <h5>Kampung dadap No.5</h5>
             </IonGrid>
           </IonCard> */}
+          <IonCard color="secondary">
+            <IonCardHeader>
+              <IonCardTitle>Made Raihan</IonCardTitle>
+              <IonCardSubtitle>Kampung dadap</IonCardSubtitle>
+            </IonCardHeader>
+
+            <IonCardContent className="ion-text-center">
+              <IonButton routerLink="/pengontrak/detail-transaksi">
+                Detail transaksi
+              </IonButton>
+            </IonCardContent>
+          </IonCard>
+          <IonCard color="secondary">
+            <IonCardHeader>
+              <IonCardTitle>Made Raihan</IonCardTitle>
+              <IonCardSubtitle>Kampung dadap</IonCardSubtitle>
+            </IonCardHeader>
+
+            <IonCardContent className="ion-text-center">
+              <IonButton routerLink="/pengontrak/detail-transaksi">
+                Detail transaksi
+              </IonButton>
+            </IonCardContent>
+          </IonCard>
+          <IonCard color="secondary">
+            <IonCardHeader>
+              <IonCardTitle>Made Raihan</IonCardTitle>
+              <IonCardSubtitle>Kampung dadap</IonCardSubtitle>
+            </IonCardHeader>
+
+            <IonCardContent className="ion-text-center">
+              <IonButton routerLink="/pengontrak/detail-transaksi">
+                Detail transaksi
+              </IonButton>
+            </IonCardContent>
+          </IonCard>
+          <IonCard color="secondary">
+            <IonCardHeader>
+              <IonCardTitle>Made Raihan</IonCardTitle>
+              <IonCardSubtitle>Kampung dadap</IonCardSubtitle>
+            </IonCardHeader>
+
+            <IonCardContent className="ion-text-center">
+              <IonButton routerLink="/pengontrak/detail-transaksi">
+                Detail transaksi
+              </IonButton>
+            </IonCardContent>
+          </IonCard>
           <div className="card-pengontrak-home">
-            <IonGrid>
+            {/* <IonGrid>
               <IonRow>
                 <IonCol>
                   <IonTitle>Made Reihan</IonTitle>
@@ -98,8 +151,8 @@ const PemilikHome: React.FC = () => {
                   </IonButton>
                 </IonCol>
               </IonRow>
-              {/* <IonTitle className="ion-text-center">25-10-2022</IonTitle> */}
-            </IonGrid>
+              <IonTitle className="ion-text-center">25-10-2022</IonTitle>
+            </IonGrid> */}
           </div>
 
           {/* <div className="ion-margin-top">
