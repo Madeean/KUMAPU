@@ -14,6 +14,7 @@ import {
 } from "@ionic/react";
 import logo from "../image/SplashScreen.png";
 import "./Login.css";
+import pengontrakHome from "../pengontrak/PengontrakHome";
 
 const Login: React.FC = () => {
   return (
@@ -32,7 +33,7 @@ const Login: React.FC = () => {
             <IonInput type="password" />
           </IonItem>
           <IonItem>
-            <IonButton>Login</IonButton>
+            <IonButton onClick={pengontrakHome}>Login</IonButton>
           </IonItem>
           <IonItemDivider />
           <IonText>Don't have an account?</IonText>
