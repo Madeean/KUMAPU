@@ -1,0 +1,16 @@
+.navbar-tambah-pembayaran-pengontrak {
+  color: #000;
+}
+.image-add-tambah-pembayaran-pengontrak {
+  margin-top: 50px !important;
+  background-color: #50d5b7;
+  width: 200px;
+  height: 200px;
+  margin: auto;
+  border: 1px solid #000;
+}
+
+.btn-kamera-gallery-tambah-pembayaran-pengontrak {
+  display: flex;
+  justify-content: space-around;
+}

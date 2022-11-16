@@ -92,7 +92,10 @@ const PengontrakHome: React.FC = () => {
             <IonGrid>
               <IonRow className="ion-align-items-center">
                 <IonCol className="ion-text-center">
-                  <IonButton className="btn-tambah-pembayaran-pengontrak-home">
+                  <IonButton
+                    className="btn-tambah-pembayaran-pengontrak-home"
+                    routerLink="/pengontrak/tambah-pembayaran"
+                  >
                     <IonIcon src={add} />
                     <IonTitle>Tambah Pembayaran</IonTitle>
                   </IonButton>
