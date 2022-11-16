@@ -1,4 +1,13 @@
-import { IonCol, IonIcon, IonRow, IonTitle } from "@ionic/react";
+import {
+  IonCard,
+  IonCardContent,
+  IonCol,
+  IonIcon,
+  IonItem,
+  IonLabel,
+  IonRow,
+  IonTitle,
+} from "@ionic/react";
 import {
   addCircle,
   add,
@@ -6,6 +15,7 @@ import {
   list,
   closeCircle,
   arrowForward,
+  star,
 } from "ionicons/icons";
 import React from "react";
 import "./GRIDpemilikOrder.css";
@@ -28,19 +38,15 @@ const GRIDpemilikOrder: React.FC<{
   };
 
   return (
-    <div className="pembungkus-grid-pemilik-order">
-      <IonRow onClick={props.onClick}>
-        <IonCol size="1">
-          <IonIcon icon={checkIcon()} />
-        </IonCol>
-        <IonCol size="10">
-          <IonTitle>{props.title}</IonTitle>
-        </IonCol>
-        <IonCol size="1">
-          <IonIcon icon={arrowForward} />
-        </IonCol>
-      </IonRow>
-    </div>
+    <IonCard color="secondary" onClick={props.onClick}>
+      <IonCardContent className="ion-text-center">
+        <IonItem lines="none">
+          <IonIcon icon={checkIcon()} slot="start" />
+          <IonLabel>{props.title}</IonLabel>
+          <IonIcon icon={arrowForward} slot="end" />
+        </IonItem>
+      </IonCardContent>
+    </IonCard>
   );
 };
 
