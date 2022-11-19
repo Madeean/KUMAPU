@@ -1,5 +1,6 @@
 import {
   IonBackButton,
+  IonButton,
   IonButtons,
   IonCard,
   IonCol,
@@ -97,6 +98,11 @@ const PemilikDetailPengontrak: React.FC = () => {
                 <IonTitle>22-09-10</IonTitle>
               </IonCol>
               <IonItemDivider />
+            </IonRow>
+            <IonRow>
+              <IonCol className="ion-text-center">
+                <IonButton>Hapus pengontrak</IonButton>
+              </IonCol>
             </IonRow>
           </IonGrid>
         </div>
