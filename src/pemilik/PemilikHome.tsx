@@ -63,7 +63,7 @@ const PemilikHome: React.FC = () => {
             </IonCardHeader>
 
             <IonCardContent className="ion-text-center">
-              <IonButton routerLink="/pengontrak/detail-transaksi">
+              <IonButton routerLink="/pemilik/detail-transaksi">
                 Detail transaksi
               </IonButton>
             </IonCardContent>
@@ -75,7 +75,7 @@ const PemilikHome: React.FC = () => {
             </IonCardHeader>
 
             <IonCardContent className="ion-text-center">
-              <IonButton routerLink="/pengontrak/detail-transaksi">
+              <IonButton routerLink="/pemilik/detail-transaksi">
                 Detail transaksi
               </IonButton>
             </IonCardContent>
@@ -87,7 +87,7 @@ const PemilikHome: React.FC = () => {
             </IonCardHeader>
 
             <IonCardContent className="ion-text-center">
-              <IonButton routerLink="/pengontrak/detail-transaksi">
+              <IonButton routerLink="/pemilik/detail-transaksi">
                 Detail transaksi
               </IonButton>
             </IonCardContent>
@@ -99,7 +99,7 @@ const PemilikHome: React.FC = () => {
             </IonCardHeader>
 
             <IonCardContent className="ion-text-center">
-              <IonButton routerLink="/pengontrak/detail-transaksi">
+              <IonButton routerLink="/pemilik/detail-transaksi">
                 Detail transaksi
               </IonButton>
             </IonCardContent>
@@ -116,7 +116,7 @@ const PemilikHome: React.FC = () => {
                   <IonTitle>Kampung dadap</IonTitle>
                 </IonCol>
                 <IonCol className="ion-text-center">
-                  <IonButton routerLink="/pengontrak/detail-transaksi">
+                  <IonButton routerLink="/pemilik/detail-transaksi">
                     Detail transaksi
                   </IonButton>
                 </IonCol>
@@ -131,7 +131,7 @@ const PemilikHome: React.FC = () => {
                   <IonTitle>Kampung dadap</IonTitle>
                 </IonCol>
                 <IonCol className="ion-text-center">
-                  <IonButton routerLink="/pengontrak/detail-transaksi">
+                  <IonButton routerLink="/pemilik/detail-transaksi">
                     Detail transaksi
                   </IonButton>
                 </IonCol>
@@ -146,7 +146,7 @@ const PemilikHome: React.FC = () => {
                   <IonTitle>Kampung dadap</IonTitle>
                 </IonCol>
                 <IonCol className="ion-text-center">
-                  <IonButton routerLink="/pengontrak/detail-transaksi">
+                  <IonButton routerLink="/pemilik/detail-transaksi">
                     Detail transaksi
                   </IonButton>
                 </IonCol>
