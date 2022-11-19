@@ -23,7 +23,15 @@ import "./PemilikOrder.css";
 import { useHistory } from "react-router";
 const PemilikOrder: React.FC = () => {
   const history = useHistory();
-  const pindahTambahPembayaran = () => {};
+  const pindahTambahPembayaran = () => {
+    history.push("/pemilik/tambah-pembayaran");
+  };
+  const PemilikBelumBayarBulanan = () => {
+    history.push("/pemilik/daftar-belum-bayar-bulanan");
+  };
+  const pindahDaftarBelumLunas = () => {
+    history.push("/pemilik/daftar-belum-lunas");
+  };
   const pindahDaftarOrangNgontrak = () => {
     history.push("/pemilik/order/daftarorangngontrak");
   };
@@ -44,7 +52,7 @@ const PemilikOrder: React.FC = () => {
             title="Tambah Pembayaran"
           />
           <GRIDpemilikOrder
-            onClick={pindahTambahPembayaran}
+            onClick={pindahDaftarBelumLunas}
             icon="checkmarkCircle"
             title="Daftar Belum Lunas"
           />
@@ -54,7 +62,7 @@ const PemilikOrder: React.FC = () => {
             title="Daftar Orang Ngontrak"
           />
           <GRIDpemilikOrder
-            onClick={pindahTambahPembayaran}
+            onClick={PemilikBelumBayarBulanan}
             icon="closeCircle"
             title="Daftar Belum Bayar Bulanan"
           />

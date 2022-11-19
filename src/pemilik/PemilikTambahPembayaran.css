@@ -1,0 +1,20 @@
+.navbar-tambah-pembayaran-pemilik {
+  color: #000;
+}
+.image-add-tambah-pembayaran-pemilik {
+  margin-top: 50px !important;
+  background-color: #50d5b7;
+  width: 200px;
+  height: 200px;
+  margin: auto;
+  border: 1px solid #000;
+}
+
+.btn-kamera-gallery-tambah-pembayaran-pemilik {
+  display: flex;
+  justify-content: space-around;
+}
+
+.dropdown-tambah-pembayaran-pemilik {
+  background: transparent;
+}

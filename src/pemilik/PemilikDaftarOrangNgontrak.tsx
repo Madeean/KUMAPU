@@ -43,53 +43,77 @@ const PemilikDaftarOrangNgontrak: React.FC = () => {
             Jumlah Orang:
           </IonLabel>
           <IonLabel>2/10</IonLabel>
-          <IonIcon icon={listOutline} slot="end" />
         </IonItem>
-        <IonCard>
-          <img
-            alt="Silhouette of mountains"
-            src="https://ionicframework.com/docs/img/demos/card-media.png"
-          />
-          <IonCardHeader>
-            <IonCardTitle>Atanasius Raditya Herkristito</IonCardTitle>
-          </IonCardHeader>
-        </IonCard>
-        <IonCard>
-          <img
-            alt="Silhouette of mountains"
-            src="https://ionicframework.com/docs/img/demos/card-media.png"
-          />
-          <IonCardHeader>
-            <IonCardTitle>Made Reihan Diva S</IonCardTitle>
-          </IonCardHeader>
-        </IonCard>
-        <IonCard>
-          <img
-            alt="Silhouette of mountains"
-            src="https://ionicframework.com/docs/img/demos/card-media.png"
-          />
-          <IonCardHeader>
-            <IonCardTitle>Daniel Kurniawan</IonCardTitle>
-          </IonCardHeader>
-        </IonCard>
-        <IonCard>
-          <img
-            alt="Silhouette of mountains"
-            src="https://ionicframework.com/docs/img/demos/card-media.png"
-          />
-          <IonCardHeader>
-            <IonCardTitle>Dwi Rianto</IonCardTitle>
-          </IonCardHeader>
-        </IonCard>
-        <IonCard>
-          <img
-            alt="Silhouette of mountains"
-            src="https://ionicframework.com/docs/img/demos/card-media.png"
-          />
-          <IonCardHeader>
-            <IonCardTitle>Bryan Rezki</IonCardTitle>
-          </IonCardHeader>
-        </IonCard>
+        <IonGrid>
+          <IonRow>
+            <IonCol size="6">
+              <IonCard routerLink="/pemilik/detail-pengontrak">
+                <img
+                  alt="Silhouette of mountains"
+                  src="https://ionicframework.com/docs/img/demos/card-media.png"
+                />
+                <IonCardHeader>
+                  <IonCardTitle>Atanasius Raditya Herkristito</IonCardTitle>
+                </IonCardHeader>
+              </IonCard>
+            </IonCol>
+            <IonCol size="6">
+              <IonCard routerLink="/pemilik/detail-pengontrak">
+                <img
+                  alt="Silhouette of mountains"
+                  src="https://ionicframework.com/docs/img/demos/card-media.png"
+                />
+                <IonCardHeader>
+                  <IonCardTitle>Made Reihan</IonCardTitle>
+                </IonCardHeader>
+              </IonCard>
+            </IonCol>
+            <IonCol size="6">
+              <IonCard routerLink="/pemilik/detail-pengontrak">
+                <img
+                  alt="Silhouette of mountains"
+                  src="https://ionicframework.com/docs/img/demos/card-media.png"
+                />
+                <IonCardHeader>
+                  <IonCardTitle>Michael Philip</IonCardTitle>
+                </IonCardHeader>
+              </IonCard>
+            </IonCol>
+            <IonCol size="6">
+              <IonCard routerLink="/pemilik/detail-pengontrak">
+                <img
+                  alt="Silhouette of mountains"
+                  src="https://ionicframework.com/docs/img/demos/card-media.png"
+                />
+                <IonCardHeader>
+                  <IonCardTitle>Daniel Kurniawan</IonCardTitle>
+                </IonCardHeader>
+              </IonCard>
+            </IonCol>
+            <IonCol size="6">
+              <IonCard routerLink="/pemilik/detail-pengontrak">
+                <img
+                  alt="Silhouette of mountains"
+                  src="https://ionicframework.com/docs/img/demos/card-media.png"
+                />
+                <IonCardHeader>
+                  <IonCardTitle>Bryan Rezki</IonCardTitle>
+                </IonCardHeader>
+              </IonCard>
+            </IonCol>
+            <IonCol size="6">
+              <IonCard routerLink="/pemilik/detail-pengontrak">
+                <img
+                  alt="Silhouette of mountains"
+                  src="https://ionicframework.com/docs/img/demos/card-media.png"
+                />
+                <IonCardHeader>
+                  <IonCardTitle>Dwi Rianto</IonCardTitle>
+                </IonCardHeader>
+              </IonCard>
+            </IonCol>
+          </IonRow>
+        </IonGrid>
       </IonContent>
     </IonPage>
   );
