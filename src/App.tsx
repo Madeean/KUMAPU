@@ -25,8 +25,11 @@ import Login from "./auth/Login";
 import Register from "./auth/Register";
 import PengontrakTab from "./pengontrak/PengontrakTab";
 import PemilikTab from "./pemilik/PemilikTab";
+import * as localforage from "localforage";
 
 setupIonicReact();
+
+export const url = "https://madeekan.madee.my.id/api/";
 
 const App: React.FC = () => (
   <IonApp>
