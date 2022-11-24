@@ -18,10 +18,14 @@ import ProfilePage from "../image/ProfilePage.png";
 import { pencil } from "ionicons/icons";
 import localforage from "localforage";
 
+import { url } from "../App";
+import axios from "axios";
+
 const PengontrakProfile: React.FC = () => {
   const [name, setName] = useState<string>();
   const [email, setEmail] = useState<string>();
   const [foto_muka, setFoto_muka] = useState<string>();
+  const [token, setToken] = useState<string>();
 
   const getData = () => {
     localforage.getItem("name").then((value: any) => {
@@ -33,11 +37,29 @@ const PengontrakProfile: React.FC = () => {
     localforage.getItem("foto_muka").then((value: any) => {
       setFoto_muka(value.toString());
     });
+    localforage.getItem("token").then((value: any) => {
+      setToken(value.toString());
+    });
   };
 
   useEffect(() => {
     getData();
   }, []);
+
+  const logoutUrl = url + "logout";
+
+  const logoutHandler = () => {
+    axios
+      .post(logoutUrl, {}, { headers: { Authorization: "Bearer " + token } })
+      .then((response) => {
+        console.log(response);
+        localforage.clear();
+        window.location.href = "/login";
+      })
+      .catch((response) => {
+        console.log(response);
+      });
+  };
 
   return (
     <IonPage>
@@ -74,7 +96,7 @@ const PengontrakProfile: React.FC = () => {
           </IonRow>
         </IonGrid>
         <div className="btn-logout-pengontrak-profile">
-          <IonButton routerLink="/login">Logout</IonButton>
+          <IonButton onClick={logoutHandler}>Logout</IonButton>
         </div>
       </IonContent>
     </IonPage>

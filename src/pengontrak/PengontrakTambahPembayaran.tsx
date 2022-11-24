@@ -9,8 +9,11 @@ import {
   IonInput,
   IonItem,
   IonLabel,
+  IonList,
   IonPage,
   IonRow,
+  IonSelect,
+  IonSelectOption,
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
@@ -27,7 +30,7 @@ const PengontrakTambahPembayaran: React.FC = () => {
   const [name, setName] = useState<string>();
   const [namaKontrakan, setNamaKontrakan] = useState<string>();
   const role = "pengontrak";
-  const dateRef = React.useRef<any>(null);
+  const [bulan, setBulan] = useState<string>();
   const jumlahBayarRef = React.useRef<HTMLIonInputElement>(null);
   // const [date, setDate] = useState<string>();
 
@@ -39,7 +42,9 @@ const PengontrakTambahPembayaran: React.FC = () => {
   const [token, setToken] = useState<string>();
 
   const current = new Date();
-  const bulan = current.getMonth() + 1;
+  const tanggal_bayar = `${current.getDate()}-${
+    current.getMonth() + 1
+  }-${current.getFullYear()}`;
 
   const history = useHistory();
 
@@ -86,11 +91,11 @@ const PengontrakTambahPembayaran: React.FC = () => {
     const bodyForm = new FormData();
     bodyForm.append("nama_pengontrak", name!);
     bodyForm.append("role", role);
-    bodyForm.append("tanggal_bayar", dateRef.current.value);
+    bodyForm.append("tanggal_bayar", tanggal_bayar);
     bodyForm.append("jumlah_bayar", jumlahBayarRef.current?.value?.toString()!);
     bodyForm.append("bukti_bayar", selectedFile as File);
     bodyForm.append("nama_kontrakan", namaKontrakan!);
-    bodyForm.append("bulan", bulan.toString());
+    bodyForm.append("bulan", bulan!);
 
     axios
       .post(tambahPembayaranUrl, bodyForm, {
@@ -126,11 +131,34 @@ const PengontrakTambahPembayaran: React.FC = () => {
           <IonRow>
             <IonCol className="ion-text-center">
               <IonTitle>Tanggal Bayar</IonTitle>
-              <IonInput
+              {/* <IonInput
                 type="date"
                 className="ioninpu-tambah-pembayaran-pengontrak"
                 ref={dateRef}
-              />
+              /> */}
+
+              <IonList className="container-register-pengontrak">
+                <IonItem>
+                  <IonSelect
+                    onIonChange={(e) => setBulan(e.detail.value)}
+                    interface="popover"
+                    placeholder="Pilih Bulan"
+                  >
+                    <IonSelectOption value="1">January</IonSelectOption>
+                    <IonSelectOption value="2">February</IonSelectOption>
+                    <IonSelectOption value="3">Maret</IonSelectOption>
+                    <IonSelectOption value="4">April</IonSelectOption>
+                    <IonSelectOption value="5">Mei</IonSelectOption>
+                    <IonSelectOption value="6">Juni</IonSelectOption>
+                    <IonSelectOption value="7">July</IonSelectOption>
+                    <IonSelectOption value="8">Agustus</IonSelectOption>
+                    <IonSelectOption value="9">Oktober</IonSelectOption>
+                    <IonSelectOption value="10">September</IonSelectOption>
+                    <IonSelectOption value="11">November</IonSelectOption>
+                    <IonSelectOption value="12">Desember</IonSelectOption>
+                  </IonSelect>
+                </IonItem>
+              </IonList>
             </IonCol>
           </IonRow>
           <IonRow>
