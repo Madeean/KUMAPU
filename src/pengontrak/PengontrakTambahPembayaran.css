@@ -14,3 +14,8 @@
   display: flex;
   justify-content: space-around;
 }
+
+.ioninpu-tambah-pembayaran-pengontrak {
+  width: 10%;
+  margin: 0 auto;
+}
