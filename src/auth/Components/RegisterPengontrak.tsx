@@ -96,6 +96,10 @@ const RegisterPengontrak: React.FC = () => {
         localforage.setItem("name", response.data.user.name);
         localforage.setItem("foto_muka", response.data.user.foto_muka);
         localforage.setItem("umur", response.data.user.umur);
+        localforage.setItem(
+          "nama_kontrakan",
+          response.data.user.nama_kontrakan
+        );
 
         history.push("/pengontrak");
       })
