@@ -12,12 +12,33 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./PengontrakProfile.css";
 import ProfilePage from "../image/ProfilePage.png";
 import { pencil } from "ionicons/icons";
+import localforage from "localforage";
 
 const PengontrakProfile: React.FC = () => {
+  const [name, setName] = useState<string>();
+  const [email, setEmail] = useState<string>();
+  const [foto_muka, setFoto_muka] = useState<string>();
+
+  const getData = () => {
+    localforage.getItem("name").then((value: any) => {
+      setName(value.toString());
+    });
+    localforage.getItem("email").then((value: any) => {
+      setEmail(value.toString());
+    });
+    localforage.getItem("foto_muka").then((value: any) => {
+      setFoto_muka(value.toString());
+    });
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
   return (
     <IonPage>
       <IonHeader>
@@ -31,12 +52,11 @@ const PengontrakProfile: React.FC = () => {
         <IonGrid fixed={true}>
           <IonRow>
             <IonCol size="2">
-              <img src={ProfilePage} className="image-pengontrak-profile" />
+              <img src={foto_muka} className="image-pengontrak-profile" />
             </IonCol>
             <IonCol className="nama-pengontrak-profile" size="8">
-              <IonTitle>Made Reihan</IonTitle>
-              <IonTitle>+629243423</IonTitle>
-              <IonTitle>Made@gmail.com</IonTitle>
+              <IonTitle>{name}</IonTitle>
+              <IonTitle>{email}</IonTitle>
             </IonCol>
             <IonCol size="2">
               <IonButtons>

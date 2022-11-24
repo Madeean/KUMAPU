@@ -35,7 +35,6 @@ const PemilikProfile: React.FC = () => {
             </IonCol>
             <IonCol className="nama-pemilik-profile" size="8">
               <IonTitle>Made Reihan</IonTitle>
-              <IonTitle>+629243423</IonTitle>
               <IonTitle>Made@gmail.com</IonTitle>
             </IonCol>
             <IonCol size="2">
