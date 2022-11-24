@@ -59,7 +59,7 @@ const PengontrakTab: React.FC = () => {
         />
         <Route
           exact
-          path="/pengontrak/detail-transaksi"
+          path="/pengontrak/detail-transaksi/:detailTransaksiId"
           component={PengontrakDetailTransaksi}
         />
       </IonRouterOutlet>
