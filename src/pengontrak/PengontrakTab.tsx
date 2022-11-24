@@ -48,7 +48,6 @@ const PengontrakTab: React.FC = () => {
           component={PengontrakRiwayatPembayaran}
         />
         <Route
-          exact
           path="/pengontrak/tambah-pembayaran"
           component={PengontrakTambahPembayaran}
         />

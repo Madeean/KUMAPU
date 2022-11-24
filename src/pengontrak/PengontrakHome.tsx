@@ -34,42 +34,64 @@ const PengontrakHome: React.FC = () => {
   const [data, setData] = useState<any[]>();
 
   const getDataNama = async () => {
-    localforage.getItem("name").then((value: any) => {
-      setName(value.toString());
-    });
-    localforage.getItem("token").then((value: any) => {
-      setToken(value);
-    });
+    try {
+      const token = await localforage.getItem("token");
+      const name = await localforage.getItem("name");
+      // This code runs once the value has been loaded
+      // from the offline store.
+      Promise.all([token, name]).then((values) => {
+        setToken(values[0]?.toString());
+        setName(values[1]?.toString());
+      });
+      setTimeout(() => {}, 10000);
+      const get = await axios.get(historyPembayaranUrl, {
+        headers: {
+          Accept: "application/json",
+          Authorization: "Bearer " + token,
+        },
+      });
+      setData(get.data.data);
+      // .then((response) => {
+      //   console.log(response.data.data);
+      //   setData(response.data.data);
+      // })
+      // .catch((response) => {
+      //   console.log(response);
+      // });
+    } catch (err) {
+      // This code runs if there were any errors.
+      console.log(err);
+    }
 
-    await getHistoryPembayaran();
+    getDataNama();
+    // setTimeout(() => {
+    //   getHistoryPembayaran();
+    // }, 1000);
   };
 
   const historyPembayaranUrl = url + "get-pembayaran-diterima-pengontrak";
 
-  const getHistoryPembayaran = async () => {
-    console.log(token);
-    await axios
-      .get(
-        "http://madeekan.madee.my.id/api/get-pembayaran-diterima-pengontrak",
-        {
-          headers: {
-            Accept: "application/json",
-            Authorization: "Bearer " + token,
-          },
-        }
-      )
-      .then((response) => {
-        console.log(response.data.data);
-        setData(response.data.data);
-      })
-      .catch((response) => {
-        console.log(response);
-      });
-  };
+  // const getHistoryPembayaran = async () => {
+  //   const TokenNow = token;
+  //   await axios
+  //     .get(historyPembayaranUrl, {
+  //       headers: {
+  //         Accept: "application/json",
+  //         Authorization: "Bearer " + TokenNow,
+  //       },
+  //     })
+  //     .then((response) => {
+  //       console.log(response.data.data);
+  //       setData(response.data.data);
+  //     })
+  //     .catch((response) => {
+  //       console.log(response);
+  //     });
+  // };
 
   useEffect(() => {
     getDataNama();
-  });
+  }, []);
 
   return (
     <>
@@ -115,7 +137,7 @@ const PengontrakHome: React.FC = () => {
             </IonGrid>
           </IonCard> */}
           {data &&
-            data.map((item) => (
+            data.slice(0, 5).map((item) => (
               <div className="card-pengontrak-home" key={item.id}>
                 <IonGrid>
                   <IonRow>
