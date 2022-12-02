@@ -61,7 +61,7 @@ const PemilikTab: React.FC = () => {
         />
         <Route
           exact
-          path="/pemilik/detail-transaksi"
+          path="/pemilik/detail-transaksi/:detailTransaksiId"
           component={PemilikDetailTransaksi}
         />
         <Route

@@ -18,9 +18,12 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
+import axios from "axios";
 import { refresh, add } from "ionicons/icons";
-import React from "react";
+import localforage from "localforage";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
+import { url } from "../App";
 import "./PemilikHome.css";
 
 const PemilikHome: React.FC = () => {
@@ -29,14 +32,44 @@ const PemilikHome: React.FC = () => {
     history.push("/pengontrak/riwayat-pembayaran");
   };
 
+  const [name, setName] = useState<string>();
+  const [token, setToken] = useState<string>();
+  const [data, setData] = useState<any[]>();
+
+  const historyPembayaranUrl = url + "get-pembayaran-diterima-pemilik";
+
+  const getData = async () => {
+    const token = await localforage.getItem("token");
+    const name = await localforage.getItem("name");
+    // This code runs once the value has been loaded
+    // from the offline store.
+
+    Promise.all([token, name]).then((values) => {
+      setToken(values[0]?.toString());
+      setName(values[1]?.toString());
+    });
+
+    const get = await axios.get(historyPembayaranUrl, {
+      headers: {
+        Accept: "application/json",
+        Authorization: "Bearer " + token,
+      },
+    });
+    setData(get.data.data);
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
   return (
     <>
       <IonPage>
         <IonHeader>
           <IonToolbar color="favorite">
             <IonTitle className="title-pengontrak-home">
-              <IonText>Good Morning,</IonText>
-              <h5>Made Reihan</h5>
+              <IonText>Hello,</IonText>
+              <h5>{name}</h5>
             </IonTitle>
             <IonSearchbar animated={true} placeholder="Cari Orang Kontrakan" />
           </IonToolbar>
@@ -56,7 +89,27 @@ const PemilikHome: React.FC = () => {
               <h5>Kampung dadap No.5</h5>
             </IonGrid>
           </IonCard> */}
-          <IonCard color="secondary">
+          {data &&
+            data.map((item) => (
+              <IonCard color="secondary" key={item.id}>
+                <IonCardHeader>
+                  <IonCardTitle>{item.nama_pengontrak}</IonCardTitle>
+                  <IonCardSubtitle>
+                    {item.user[0].alamat_kontrakan_sekarang}
+                  </IonCardSubtitle>
+                </IonCardHeader>
+
+                <IonCardContent className="ion-text-center">
+                  <IonButton
+                    routerLink={"/pemilik/detail-transaksi/" + item.id}
+                  >
+                    Detail transaksi
+                  </IonButton>
+                </IonCardContent>
+              </IonCard>
+            ))}
+
+          {/* <IonCard color="secondary">
             <IonCardHeader>
               <IonCardTitle>Made Raihan</IonCardTitle>
               <IonCardSubtitle>Kampung dadap</IonCardSubtitle>
@@ -91,21 +144,9 @@ const PemilikHome: React.FC = () => {
                 Detail transaksi
               </IonButton>
             </IonCardContent>
-          </IonCard>
-          <IonCard color="secondary">
-            <IonCardHeader>
-              <IonCardTitle>Made Raihan</IonCardTitle>
-              <IonCardSubtitle>Kampung dadap</IonCardSubtitle>
-            </IonCardHeader>
-
-            <IonCardContent className="ion-text-center">
-              <IonButton routerLink="/pemilik/detail-transaksi">
-                Detail transaksi
-              </IonButton>
-            </IonCardContent>
-          </IonCard>
-          <div className="card-pengontrak-home">
-            {/* <IonGrid>
+          </IonCard> */}
+          {/* <div className="card-pengontrak-home"> */}
+          {/* <IonGrid>
               <IonRow>
                 <IonCol>
                   <IonTitle>Made Reihan</IonTitle>
@@ -153,7 +194,7 @@ const PemilikHome: React.FC = () => {
               </IonRow>
               <IonTitle className="ion-text-center">25-10-2022</IonTitle>
             </IonGrid> */}
-          </div>
+          {/* </div> */}
 
           {/* <div className="ion-margin-top">
             <IonGrid>

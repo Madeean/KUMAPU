@@ -33,17 +33,20 @@ const PengontrakHome: React.FC = () => {
   const [token, setToken] = useState<string>();
   const [data, setData] = useState<any[]>();
 
+  const historyPembayaranUrl = url + "get-pembayaran-diterima-pengontrak";
+
   const getDataNama = async () => {
     try {
       const token = await localforage.getItem("token");
       const name = await localforage.getItem("name");
       // This code runs once the value has been loaded
       // from the offline store.
+
       Promise.all([token, name]).then((values) => {
         setToken(values[0]?.toString());
         setName(values[1]?.toString());
       });
-      setTimeout(() => {}, 10000);
+
       const get = await axios.get(historyPembayaranUrl, {
         headers: {
           Accept: "application/json",
@@ -63,13 +66,10 @@ const PengontrakHome: React.FC = () => {
       console.log(err);
     }
 
-    getDataNama();
     // setTimeout(() => {
     //   getHistoryPembayaran();
     // }, 1000);
   };
-
-  const historyPembayaranUrl = url + "get-pembayaran-diterima-pengontrak";
 
   // const getHistoryPembayaran = async () => {
   //   const TokenNow = token;
@@ -138,7 +138,10 @@ const PengontrakHome: React.FC = () => {
           </IonCard> */}
           {data &&
             data.slice(0, 5).map((item) => (
-              <div className="card-pengontrak-home" key={item.id}>
+              <div
+                className="card-pengontrak-home ion-margin-top"
+                key={item.id}
+              >
                 <IonGrid>
                   <IonRow>
                     <IonCol>
