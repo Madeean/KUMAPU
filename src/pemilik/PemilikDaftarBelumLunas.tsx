@@ -13,10 +13,41 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import React from "react";
+import localforage from "localforage";
+import React, { useEffect, useState } from "react";
 import "./PemilikDaftarBelumLunas.css";
+import { url } from "../App";
+import axios from "axios";
 
 const PemilikDaftarBelumLunas: React.FC = () => {
+  const [token, setToken] = useState<string>();
+  const [data, setData] = useState<any[]>();
+
+  const UrlGetPembayaranBelumLunas = url + "get-pembayaran-belum-lunas-pemilik";
+
+  const getData = async () => {
+    const token = await localforage.getItem("token");
+    setToken(token?.toString());
+
+    axios
+      .get(UrlGetPembayaranBelumLunas, {
+        headers: {
+          Accept: "application/json",
+          Authorization: "Bearer " + token,
+        },
+      })
+      .then((response) => {
+        setData(response.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
   return (
     <IonPage>
       <IonHeader>
@@ -30,24 +61,28 @@ const PemilikDaftarBelumLunas: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <IonCard color="secondary">
-          <IonCardHeader>
-            <IonCardTitle>Made Raihan</IonCardTitle>
-            <IonCardSubtitle>Kampung dadap</IonCardSubtitle>
-            <IonTitle className="ion-text-end" color="danger">
-              Belum Lunas
-            </IonTitle>
-            <IonTitle className="ion-text-center">
-              Rp 100.000 / 200.000
-            </IonTitle>
-          </IonCardHeader>
+        {data?.map((item) => (
+          <IonCard color="secondary" key={item.id}>
+            <IonCardHeader>
+              <IonCardTitle>{item.nama_pengontrak}</IonCardTitle>
+              <IonCardSubtitle>
+                {item.user[0].alamat_kontrakan_sekarang}
+              </IonCardSubtitle>
+              <IonTitle className="ion-text-end" color="danger">
+                {item.status_lunas}
+              </IonTitle>
+              <IonTitle className="ion-text-center">
+                {`Rp. ${item.jumlah_bayar} / Rp. ${item.user[0].harga_perbulan}`}
+              </IonTitle>
+            </IonCardHeader>
 
-          <IonCardContent className="ion-text-center">
-            <IonButton routerLink="/pengontrak/detail-transaksi">
-              Detail transaksi
-            </IonButton>
-          </IonCardContent>
-        </IonCard>
+            <IonCardContent className="ion-text-center">
+              <IonButton routerLink={"/pengontrak/detail-transaksi/" + item.id}>
+                Detail transaksi
+              </IonButton>
+            </IonCardContent>
+          </IonCard>
+        ))}
       </IonContent>
     </IonPage>
   );

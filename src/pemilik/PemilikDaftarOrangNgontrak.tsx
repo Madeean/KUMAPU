@@ -19,12 +19,53 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { listOutline } from "ionicons/icons";
-
+import { url } from "../App";
 import "./PemilikDaftarOrangNgontrak.css";
+import localforage from "localforage";
+import axios from "axios";
 
 const PemilikDaftarOrangNgontrak: React.FC = () => {
+  const [token, setToken] = useState<string>();
+  const [rooms, setRooms] = useState<string>();
+  const [data, setData] = useState<any[]>();
+  const [jumlahOrang, SetJumlahOrang] = useState<number>(0);
+
+  const UrlGetDaftarOrangNgontrak = url + "get-user-kontrakan";
+
+  const getData = async () => {
+    const token = await localforage.getItem("token");
+    const rooms = await localforage.getItem("rooms");
+    // This code runs once the value has been loaded
+    // from the offline store.
+
+    Promise.all([token, rooms]).then((values) => {
+      setToken(values[0]?.toString());
+      setRooms(values[1]?.toString());
+    });
+
+    axios
+      .get(UrlGetDaftarOrangNgontrak, {
+        headers: {
+          Accept: "application/json",
+          Authorization: "Bearer " + token,
+        },
+      })
+      .then((response) => {
+        // console.log(response.data.user.length);
+        SetJumlahOrang(response.data.user.length);
+        setData(response.data.user);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
   return (
     <IonPage>
       <IonHeader>
@@ -42,76 +83,20 @@ const PemilikDaftarOrangNgontrak: React.FC = () => {
           <IonLabel className="pembayaran-terbaru-pengontrak-home">
             Jumlah Orang:
           </IonLabel>
-          <IonLabel>2/10</IonLabel>
+          <IonLabel>{jumlahOrang + " / " + rooms}</IonLabel>
         </IonItem>
         <IonGrid>
           <IonRow>
-            <IonCol size="6">
-              <IonCard routerLink="/pemilik/detail-pengontrak">
-                <img
-                  alt="Silhouette of mountains"
-                  src="https://ionicframework.com/docs/img/demos/card-media.png"
-                />
-                <IonCardHeader>
-                  <IonCardTitle>Atanasius Raditya Herkristito</IonCardTitle>
-                </IonCardHeader>
-              </IonCard>
-            </IonCol>
-            <IonCol size="6">
-              <IonCard routerLink="/pemilik/detail-pengontrak">
-                <img
-                  alt="Silhouette of mountains"
-                  src="https://ionicframework.com/docs/img/demos/card-media.png"
-                />
-                <IonCardHeader>
-                  <IonCardTitle>Made Reihan</IonCardTitle>
-                </IonCardHeader>
-              </IonCard>
-            </IonCol>
-            <IonCol size="6">
-              <IonCard routerLink="/pemilik/detail-pengontrak">
-                <img
-                  alt="Silhouette of mountains"
-                  src="https://ionicframework.com/docs/img/demos/card-media.png"
-                />
-                <IonCardHeader>
-                  <IonCardTitle>Michael Philip</IonCardTitle>
-                </IonCardHeader>
-              </IonCard>
-            </IonCol>
-            <IonCol size="6">
-              <IonCard routerLink="/pemilik/detail-pengontrak">
-                <img
-                  alt="Silhouette of mountains"
-                  src="https://ionicframework.com/docs/img/demos/card-media.png"
-                />
-                <IonCardHeader>
-                  <IonCardTitle>Daniel Kurniawan</IonCardTitle>
-                </IonCardHeader>
-              </IonCard>
-            </IonCol>
-            <IonCol size="6">
-              <IonCard routerLink="/pemilik/detail-pengontrak">
-                <img
-                  alt="Silhouette of mountains"
-                  src="https://ionicframework.com/docs/img/demos/card-media.png"
-                />
-                <IonCardHeader>
-                  <IonCardTitle>Bryan Rezki</IonCardTitle>
-                </IonCardHeader>
-              </IonCard>
-            </IonCol>
-            <IonCol size="6">
-              <IonCard routerLink="/pemilik/detail-pengontrak">
-                <img
-                  alt="Silhouette of mountains"
-                  src="https://ionicframework.com/docs/img/demos/card-media.png"
-                />
-                <IonCardHeader>
-                  <IonCardTitle>Dwi Rianto</IonCardTitle>
-                </IonCardHeader>
-              </IonCard>
-            </IonCol>
+            {data?.map((item) => (
+              <IonCol size="6" key={item.id}>
+                <IonCard routerLink={"/pemilik/detail-pengontrak/" + item.id}>
+                  <img alt={item.name} src={item.foto_muka} />
+                  <IonCardHeader>
+                    <IonCardTitle>{item.name}</IonCardTitle>
+                  </IonCardHeader>
+                </IonCard>
+              </IonCol>
+            ))}
           </IonRow>
         </IonGrid>
       </IonContent>
