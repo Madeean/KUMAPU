@@ -16,6 +16,7 @@ import {
   closeCircle,
   arrowForward,
   star,
+  documentText,
 } from "ionicons/icons";
 import React from "react";
 import "./GRIDpemilikOrder.css";
@@ -34,6 +35,8 @@ const GRIDpemilikOrder: React.FC<{
       return list;
     } else if (props.icon === "closeCircle") {
       return closeCircle;
+    } else if (props.icon == "documentText") {
+      return documentText;
     }
   };
 

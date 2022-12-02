@@ -11,11 +11,73 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import React from "react";
+import localforage from "localforage";
+import React, { useEffect, useRef, useState } from "react";
 
 import "./PemilikEditProfile.css";
 
-const pemilikEditProfile: React.FC = () => {
+import { url } from "../App";
+import axios from "axios";
+import { useHistory } from "react-router";
+
+const PemilikEditProfile: React.FC = () => {
+  const history = useHistory();
+  const NameRef = useRef<HTMLIonInputElement>(null);
+  const NamaKontrakanRef = useRef<HTMLIonInputElement>(null);
+  const RoomsRef = useRef<HTMLIonInputElement>(null);
+  const [token, setToken] = useState<string>();
+
+  const GetData = async () => {
+    const name = await localforage.getItem("name");
+    const namaKontrakan = await localforage.getItem("nama_kontrakan");
+    const rooms = await localforage.getItem("rooms");
+    const token = await localforage.getItem("token");
+
+    Promise.all([name, namaKontrakan, rooms, token]).then((values) => {
+      NameRef.current!.value = values[0]?.toString();
+      NamaKontrakanRef.current!.value = values[1]?.toString();
+      RoomsRef.current!.value = values[2]?.toString();
+      setToken(values[3]?.toString());
+    });
+  };
+
+  useEffect(() => {
+    GetData();
+  }, []);
+
+  const UrlEditProfile = url + "edit-profile";
+
+  const editProfile = () => {
+    var bodyFormData = new FormData();
+    bodyFormData.append("name", NameRef.current!.value?.toString()!);
+    bodyFormData.append(
+      "nama_kontrakan",
+      NamaKontrakanRef.current!.value?.toString()!
+    );
+    bodyFormData.append("rooms", RoomsRef.current!.value?.toString()!);
+
+    axios
+      .post(UrlEditProfile, bodyFormData, {
+        headers: {
+          Accept: "application/json",
+          Authorization: "Bearer " + token,
+        },
+      })
+      .then(function (response) {
+        console.log(response);
+        localforage.setItem("name", NameRef.current!.value?.toString()!);
+        localforage.setItem(
+          "nama_kontrakan",
+          NamaKontrakanRef.current!.value?.toString()!
+        );
+        localforage.setItem("rooms", RoomsRef.current!.value?.toString()!);
+        history.push("/pemilik/profile");
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
   return (
     <IonPage>
       <IonHeader className="ion-no-border">
@@ -31,23 +93,23 @@ const pemilikEditProfile: React.FC = () => {
       <IonContent className="background-pemilik-edit-profile ion-padding">
         <IonItem>
           <IonLabel position="floating">Nama</IonLabel>
-          <IonInput />
+          <IonInput ref={NameRef} />
         </IonItem>
         <IonItem>
           <IonLabel position="floating">Nama Kontrakan</IonLabel>
-          <IonInput />
+          <IonInput ref={NamaKontrakanRef} />
         </IonItem>
         <IonItem>
           <IonLabel position="floating">Ruangan yang dipunya</IonLabel>
-          <IonInput type="number" />
+          <IonInput type="number" ref={RoomsRef} />
         </IonItem>
 
         <div className="btn-edit-profile-pemilik">
-          <IonButton>Edit Profile</IonButton>
+          <IonButton onClick={editProfile}>Edit Profile</IonButton>
         </div>
       </IonContent>
     </IonPage>
   );
 };
 
-export default pemilikEditProfile;
+export default PemilikEditProfile;

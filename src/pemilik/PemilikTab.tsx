@@ -14,11 +14,13 @@ import PemilikDaftarBelumLunas from "./PemilikDaftarBelumLunas";
 import PemilikDaftarOrangNgontrak from "./PemilikDaftarOrangNgontrak";
 import PemilikDetailPengontrak from "./PemilikDetailPengontrak";
 import PemilikDetailTransaksi from "./PemilikDetailTransaksi";
+import PemilikEditProfile from "./PemilikEditProfile";
 import pemilikEditProfile from "./PemilikEditProfile";
 import PemilikHome from "./PemilikHome";
 import PemilikOrder from "./PemilikOrder";
 import PemilikPembayaranBerhasil from "./PemilikPembayaranBerhasil";
 import PemilikProfile from "./PemilikProfile";
+import PemilikRequestPembayaran from "./PemilikRequestPembayaran";
 import PemilikTambahPembayaran from "./PemilikTambahPembayaran";
 
 const PemilikTab: React.FC = () => {
@@ -37,7 +39,7 @@ const PemilikTab: React.FC = () => {
         <Route
           exact
           path="/pemilik/profile/edit"
-          component={pemilikEditProfile}
+          component={PemilikEditProfile}
         />
         <Route
           exact
@@ -61,12 +63,17 @@ const PemilikTab: React.FC = () => {
         />
         <Route
           exact
+          path="/pemilik/request-pembayaran"
+          component={PemilikRequestPembayaran}
+        />
+        <Route
+          exact
           path="/pemilik/detail-transaksi/:detailTransaksiId"
           component={PemilikDetailTransaksi}
         />
         <Route
           exact
-          path="/pemilik/detail-pengontrak"
+          path="/pemilik/detail-pengontrak/:detailPengontrakId"
           component={PemilikDetailPengontrak}
         />
       </IonRouterOutlet>

@@ -44,6 +44,7 @@ const Login: React.FC = () => {
           "nama_kontrakan",
           response.data.user.nama_kontrakan
         );
+        localforage.setItem("rooms", response.data.user.rooms);
         if (response.data.user.role == "pengontrak") {
           history.push("/pengontrak");
         } else {

@@ -108,10 +108,10 @@ const RegisterPengontrak: React.FC = () => {
       });
   };
 
-  const takePhotoHandler = async () => {
+  const takePhotoHandler = async (via: string) => {
     const photo = await Camera.getPhoto({
       resultType: CameraResultType.Uri,
-      source: CameraSource.Camera,
+      source: via == "camera" ? CameraSource.Camera : CameraSource.Photos,
       quality: 80,
       width: 500,
     });
@@ -186,10 +186,16 @@ const RegisterPengontrak: React.FC = () => {
           </div>
 
           <div className="btn-kamera-gallery-register-pengontrak">
-            <IonButton color="medium" onClick={takePhotoHandler}>
+            <IonButton
+              color="medium"
+              onClick={() => takePhotoHandler("camera")}
+            >
               Kamera
             </IonButton>
-            <IonButton color="favorite" onClick={takePhotoHandler}>
+            <IonButton
+              color="favorite"
+              onClick={() => takePhotoHandler("gallery")}
+            >
               Gallery
             </IonButton>
           </div>

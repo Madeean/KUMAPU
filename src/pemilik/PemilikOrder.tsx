@@ -35,6 +35,9 @@ const PemilikOrder: React.FC = () => {
   const pindahDaftarOrangNgontrak = () => {
     history.push("/pemilik/order/daftarorangngontrak");
   };
+  const PemilikRequest = () => {
+    history.push("/pemilik/request-pembayaran");
+  };
   return (
     <IonPage>
       <IonHeader>
@@ -65,6 +68,12 @@ const PemilikOrder: React.FC = () => {
             onClick={PemilikBelumBayarBulanan}
             icon="closeCircle"
             title="Daftar Belum Bayar Bulanan"
+          />
+
+          <GRIDpemilikOrder
+            onClick={PemilikRequest}
+            icon="documentText"
+            title="Daftar Request Pembayaran"
           />
         </IonGrid>
       </IonContent>
