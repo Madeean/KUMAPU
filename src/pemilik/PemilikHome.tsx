@@ -39,16 +39,24 @@ const PemilikHome: React.FC = () => {
   const historyPembayaranUrl = url + "get-pembayaran-diterima-pemilik";
 
   const getData = async () => {
-    const token = await localforage.getItem("token");
+    const tokenSP = await localforage.getItem("token");
     const name = await localforage.getItem("name");
     // This code runs once the value has been loaded
     // from the offline store.
 
-    Promise.all([token, name]).then((values) => {
+    Promise.all([tokenSP, name]).then((values) => {
       setToken(values[0]?.toString());
       setName(values[1]?.toString());
     });
 
+    if (tokenSP != null) {
+      getdata(tokenSP.toString());
+    } else {
+      getData();
+    }
+  };
+
+  const getdata = async (token: string) => {
     const get = await axios.get(historyPembayaranUrl, {
       headers: {
         Accept: "application/json",

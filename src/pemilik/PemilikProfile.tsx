@@ -28,8 +28,6 @@ const PemilikProfile: React.FC = () => {
   const [fotoMuka, setfotoMuka] = useState<string>();
   const [token, setToken] = useState<string>();
 
-  const history = useHistory();
-
   const getData = async () => {
     const name = await localforage.getItem("name");
     const email = await localforage.getItem("email");
@@ -63,7 +61,7 @@ const PemilikProfile: React.FC = () => {
       .then((response) => {
         localforage.clear();
 
-        history.push("/login");
+        window.location.href = "/login";
       })
       .catch((error) => {
         console.log(error);
