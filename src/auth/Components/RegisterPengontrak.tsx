@@ -131,7 +131,6 @@ const RegisterPengontrak: React.FC = () => {
 
   return (
     <IonGrid>
-      <IonButton onClick={test}>test</IonButton>
       <IonRow>
         <IonCol>
           <IonList className="container-register-pengontrak">

@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">kumapu</string>
+    <string name="title_activity_main">kumapu</string>
+    <string name="package_name">umn.ac.kumapu</string>
+    <string name="custom_url_scheme">umn.ac.kumapu</string>
+</resources>

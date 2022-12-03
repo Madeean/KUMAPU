@@ -37,23 +37,21 @@ const PengontrakHome: React.FC = () => {
 
   const getDataNama = async () => {
     try {
-      const token = await localforage.getItem("token");
+      const tokenSP = await localforage.getItem("token");
       const name = await localforage.getItem("name");
       // This code runs once the value has been loaded
       // from the offline store.
 
-      Promise.all([token, name]).then((values) => {
+      Promise.all([tokenSP, name]).then((values) => {
         setToken(values[0]?.toString());
         setName(values[1]?.toString());
       });
 
-      const get = await axios.get(historyPembayaranUrl, {
-        headers: {
-          Accept: "application/json",
-          Authorization: "Bearer " + token,
-        },
-      });
-      setData(get.data.data);
+      if (tokenSP != null) {
+        getdata(tokenSP.toString());
+      } else {
+        getDataNama();
+      }
       // .then((response) => {
       //   console.log(response.data.data);
       //   setData(response.data.data);
@@ -69,6 +67,23 @@ const PengontrakHome: React.FC = () => {
     // setTimeout(() => {
     //   getHistoryPembayaran();
     // }, 1000);
+  };
+
+  const getdata = async (token: String) => {
+    axios
+      .get(historyPembayaranUrl, {
+        headers: {
+          Accept: "application/json",
+          Authorization: "Bearer " + token,
+        },
+      })
+      .then((response) => {
+        console.log(response.data.data);
+        setData(response.data.data);
+      })
+      .catch((response) => {
+        console.log(response);
+      });
   };
 
   // const getHistoryPembayaran = async () => {
