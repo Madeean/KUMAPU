@@ -109,12 +109,22 @@ const RegisterPengontrak: React.FC = () => {
   };
 
   const takePhotoHandler = async (via: string) => {
-    const photo = await Camera.getPhoto({
-      resultType: CameraResultType.Uri,
-      source: via == "camera" ? CameraSource.Camera : CameraSource.Photos,
-      quality: 80,
-      width: 500,
-    });
+    let photo;
+    if (via == "camera") {
+      photo = await Camera.getPhoto({
+        resultType: CameraResultType.Uri,
+        source: CameraSource.Camera,
+        quality: 80,
+        width: 500,
+      });
+    } else {
+      photo = await Camera.getPhoto({
+        resultType: CameraResultType.Uri,
+        source: CameraSource.Photos,
+        quality: 80,
+        width: 500,
+      });
+    }
 
     const response = await fetch(photo.webPath!);
     const blob = await response.blob();
