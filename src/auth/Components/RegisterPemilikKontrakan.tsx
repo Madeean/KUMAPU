@@ -38,7 +38,6 @@ const RegisterPemilikKontrakan: React.FC = () => {
     axios
       .post(registerUrl, bodyformm)
       .then((response) => {
-        console.log(response.data);
         localforage.setItem("email", response.data.user.email);
         localforage.setItem("token", response.data.token);
         localforage.setItem("name", response.data.user.name);

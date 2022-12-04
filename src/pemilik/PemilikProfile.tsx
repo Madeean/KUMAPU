@@ -45,6 +45,7 @@ const PemilikProfile: React.FC = () => {
   }, []);
 
   const UrlLogout = url + "logout";
+  const history = useHistory();
 
   const logout = () => {
     axios
@@ -61,7 +62,7 @@ const PemilikProfile: React.FC = () => {
       .then((response) => {
         localforage.clear();
 
-        window.location.href = "/login";
+        history.push("/login");
       })
       .catch((error) => {
         console.log(error);

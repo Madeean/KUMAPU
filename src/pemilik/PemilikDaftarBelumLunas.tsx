@@ -10,6 +10,8 @@ import {
   IonContent,
   IonHeader,
   IonPage,
+  IonRefresher,
+  IonRefresherContent,
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
@@ -61,6 +63,9 @@ const PemilikDaftarBelumLunas: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
+        <IonRefresher slot="fixed" onIonRefresh={getData}>
+          <IonRefresherContent></IonRefresherContent>
+        </IonRefresher>
         {data?.map((item) => (
           <IonCard color="secondary" key={item.id}>
             <IonCardHeader>
@@ -77,7 +82,7 @@ const PemilikDaftarBelumLunas: React.FC = () => {
             </IonCardHeader>
 
             <IonCardContent className="ion-text-center">
-              <IonButton routerLink={"/pengontrak/detail-transaksi/" + item.id}>
+              <IonButton routerLink={"/pemilik/detail-transaksi/" + item.id}>
                 Detail transaksi
               </IonButton>
             </IonCardContent>

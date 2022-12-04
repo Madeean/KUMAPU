@@ -56,10 +56,6 @@ const RegisterPengontrak: React.FC = () => {
     getNamaKontrakan();
   }, []);
 
-  const test = () => {
-    console.log(selectNamaKontrakan);
-  };
-
   const registerUrl = url + "register";
 
   const registerHandler = () => {

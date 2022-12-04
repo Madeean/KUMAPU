@@ -20,6 +20,7 @@ import localforage from "localforage";
 
 import { url } from "../App";
 import axios from "axios";
+import { useHistory } from "react-router";
 
 const PengontrakProfile: React.FC = () => {
   const [name, setName] = useState<string>();
@@ -47,14 +48,13 @@ const PengontrakProfile: React.FC = () => {
   }, []);
 
   const logoutUrl = url + "logout";
-
+  const history = useHistory();
   const logoutHandler = () => {
     axios
       .post(logoutUrl, {}, { headers: { Authorization: "Bearer " + token } })
       .then((response) => {
-        console.log(response);
         localforage.clear();
-        window.location.href = "/login";
+        history.push("/login");
       })
       .catch((response) => {
         console.log(response);

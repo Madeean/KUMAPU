@@ -105,7 +105,6 @@ const PengontrakTambahPembayaran: React.FC = () => {
         },
       })
       .then((response) => {
-        console.log(response.data);
         history.push("/pengontrak/pembayaran-berhasil");
       })
       .catch((error) => {

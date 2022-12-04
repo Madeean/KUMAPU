@@ -11,6 +11,8 @@ import {
   IonContent,
   IonHeader,
   IonPage,
+  IonRefresher,
+  IonRefresherContent,
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
@@ -18,6 +20,7 @@ import {
 import { url } from "../App";
 import localforage from "localforage";
 import axios from "axios";
+import { useHistory } from "react-router";
 
 const PemilikRequestPembayaran: React.FC = () => {
   const [token, setToken] = useState<string>();
@@ -26,9 +29,17 @@ const PemilikRequestPembayaran: React.FC = () => {
   const UrlGetRequestPembayaran = url + "get-request-pemilik";
 
   const getData = async () => {
-    const token = await localforage.getItem("token");
-    setToken(token?.toString());
+    const tokenSP = await localforage.getItem("token");
+    setToken(tokenSP?.toString());
 
+    if (tokenSP != null) {
+      getPembayaran(tokenSP?.toString());
+    } else {
+      getData();
+    }
+  };
+
+  const getPembayaran = async (token: string) => {
     axios
       .get(UrlGetRequestPembayaran, {
         headers: {
@@ -37,7 +48,6 @@ const PemilikRequestPembayaran: React.FC = () => {
         },
       })
       .then((response) => {
-        console.log(response.data);
         setData(response.data.data);
       })
       .catch((error) => {
@@ -48,6 +58,8 @@ const PemilikRequestPembayaran: React.FC = () => {
   useEffect(() => {
     getData();
   }, []);
+
+  const history = useHistory();
 
   const TolakPembayaran = (id: any) => {
     const UrlTolakPembayaran = url + "tolak-pembayaran/" + id;
@@ -63,9 +75,8 @@ const PemilikRequestPembayaran: React.FC = () => {
         }
       )
       .then((response) => {
-        console.log(response);
         // reload page
-        window.location.reload();
+        getData();
       })
       .catch((error) => {
         console.log(error);
@@ -85,9 +96,8 @@ const PemilikRequestPembayaran: React.FC = () => {
         }
       )
       .then((response) => {
-        console.log(response);
         // reload page
-        window.location.reload();
+        getData();
       })
       .catch((error) => {
         console.log(error);
@@ -123,7 +133,7 @@ const PemilikRequestPembayaran: React.FC = () => {
               >
                 Tolak Pembayaran
               </IonButton>
-              <IonButton routerLink={"/pengontrak/detail-transaksi/" + item.id}>
+              <IonButton routerLink={"/pemilik/detail-transaksi/" + item.id}>
                 Detail transaksi
               </IonButton>
               <IonButton

@@ -14,6 +14,8 @@ import {
   IonItem,
   IonLabel,
   IonPage,
+  IonRefresher,
+  IonRefresherContent,
   IonRow,
   IonText,
   IonTitle,
@@ -79,6 +81,9 @@ const PemilikDaftarOrangNgontrak: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
+        <IonRefresher slot="fixed" onIonRefresh={getData}>
+          <IonRefresherContent></IonRefresherContent>
+        </IonRefresher>
         <IonItem lines="none">
           <IonLabel className="pembayaran-terbaru-pengontrak-home">
             Jumlah Orang:

@@ -30,11 +30,9 @@ const Login: React.FC = () => {
     var bodyFormData = new FormData();
     bodyFormData.append("email", email?.toString()!);
     bodyFormData.append("password", password?.toString()!);
-    console.log(email);
     axios
       .post(urlLogin, bodyFormData)
       .then((response) => {
-        console.log(response.data);
         localforage.setItem("email", response.data.user.email);
         localforage.setItem("token", response.data.token);
         localforage.setItem("name", response.data.user.name);

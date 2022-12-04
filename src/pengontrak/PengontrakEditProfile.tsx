@@ -64,7 +64,6 @@ const PengontrakEditProfile: React.FC = () => {
         },
       })
       .then((response) => {
-        console.log(response);
         localforage.setItem("email", response.data.user.email);
         localforage.setItem("token", response.data.token);
         localforage.setItem("name", response.data.user.name);

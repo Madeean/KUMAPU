@@ -4,6 +4,8 @@ import {
   IonGrid,
   IonHeader,
   IonPage,
+  IonRefresher,
+  IonRefresherContent,
   IonRow,
   IonTitle,
   IonToolbar,
@@ -22,23 +24,16 @@ const PengontrakPermintaanPembayaran: React.FC = () => {
 
   const getToken = async () => {
     try {
-      const token = await localforage.getItem("token");
-      Promise.all([token]).then((values) => {
+      const tokenSP = await localforage.getItem("token");
+      Promise.all([tokenSP]).then((values) => {
         setToken(values[0]?.toString());
       });
 
-      await axios
-        .get(requestPembayaranUrl, {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        })
-        .then((response) => {
-          setData(response.data.data);
-        })
-        .catch((response) => {
-          console.log(response);
-        });
+      if (tokenSP != null) {
+        getPermintaan(tokenSP?.toString());
+      } else {
+        getToken();
+      }
     } catch (err) {
       console.log(err);
     }
@@ -46,6 +41,21 @@ const PengontrakPermintaanPembayaran: React.FC = () => {
   };
 
   const requestPembayaranUrl = url + "get-request-pembayaran";
+
+  const getPermintaan = async (token: string) => {
+    axios
+      .get(requestPembayaranUrl, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      })
+      .then((response) => {
+        setData(response.data.data);
+      })
+      .catch((response) => {
+        console.log(response);
+      });
+  };
 
   // const getData = () => {
   //   axios
@@ -76,6 +86,9 @@ const PengontrakPermintaanPembayaran: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
+        <IonRefresher slot="fixed" onIonRefresh={getToken}>
+          <IonRefresherContent></IonRefresherContent>
+        </IonRefresher>
         {data.map((item: any) => (
           <div
             className="ion-margin-top card-permintaan-pembayaran-pengontrak"
