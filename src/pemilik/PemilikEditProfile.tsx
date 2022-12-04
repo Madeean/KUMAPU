@@ -64,7 +64,6 @@ const PemilikEditProfile: React.FC = () => {
         },
       })
       .then(function (response) {
-        console.log(response);
         localforage.setItem("name", NameRef.current!.value?.toString()!);
         localforage.setItem(
           "nama_kontrakan",

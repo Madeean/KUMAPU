@@ -49,7 +49,6 @@ const PemilikDetailTransaksi: React.FC = () => {
         },
       })
       .then((response) => {
-        console.log(response.data.data);
         setName(response.data.data.user[0].name);
         setAlamatKontrakan(
           response.data.data.user[0].alamat_kontrakan_sekarang

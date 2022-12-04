@@ -50,7 +50,6 @@ const PemilikDetailPengontrak: React.FC = () => {
         },
       })
       .then((response) => {
-        console.log(response.data);
         setName(response.data.user.name);
         setUmur(response.data.user.umur);
         setAlamatKtp(response.data.user.alamat_sesuai_ktp);
@@ -120,9 +119,7 @@ const PemilikDetailPengontrak: React.FC = () => {
           Authorization: "Bearer " + token,
         },
       })
-      .then((response) => {
-        console.log(response.data);
-      })
+      .then((response) => {})
       .catch((error) => {
         console.log(error);
       });

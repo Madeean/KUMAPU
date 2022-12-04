@@ -52,7 +52,6 @@ const PemilikDaftarBelumBayarBulanan: React.FC = () => {
         },
       })
       .then((response) => {
-        console.log(response.data);
         if (
           response.data.message ==
           `semua anak kontrakan belum bayar bulan ${bulan}, list belum bayar`

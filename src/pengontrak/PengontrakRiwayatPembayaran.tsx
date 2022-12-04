@@ -46,7 +46,6 @@ const PengontrakRiwayatPembayaran: React.FC = () => {
           },
         })
         .then((response) => {
-          console.log(response.data.data);
           setData(response.data.data);
         })
         .catch((response) => {
