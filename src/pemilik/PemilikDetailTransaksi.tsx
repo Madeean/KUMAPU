@@ -37,18 +37,28 @@ const PemilikDetailTransaksi: React.FC = () => {
   const [token, setToken] = useState<string>();
 
   const detailTransaksiUrl = url + "detail-transaksi/" + detailTransaksiId;
+
   const getData = async () => {
-    localforage.getItem("token").then((value: any) => {
-      setToken(value);
-    });
-    await axios
+    const tokenSP = await localforage.getItem("token");
+    setToken(tokenSP?.toString());
+
+    if (tokenSP != null) {
+      getdetail(tokenSP?.toString());
+    } else {
+      getData();
+    }
+  };
+  const getdetail = (tokenbaru: string) => {
+    const tokenpake = "Bearer " + tokenbaru;
+    axios
       .get(detailTransaksiUrl, {
         headers: {
           Accept: "application/json",
-          Authorization: "Bearer " + token,
+          Authorization: tokenpake,
         },
       })
       .then((response) => {
+        console.log(response);
         setName(response.data.data.user[0].name);
         setAlamatKontrakan(
           response.data.data.user[0].alamat_kontrakan_sekarang
@@ -69,7 +79,7 @@ const PemilikDetailTransaksi: React.FC = () => {
 
   useEffect(() => {
     getData();
-  }, [getData]);
+  }, []);
 
   return (
     <IonPage>
@@ -121,7 +131,9 @@ const PemilikDetailTransaksi: React.FC = () => {
                 <IonTitle
                   color={statusBulanIni == "LUNAS" ? "primary" : "danger"}
                 >
-                  {statusBulanIni}
+                  {statusBulanIni == null
+                    ? "Menunggu Konfirmasi"
+                    : statusBulanIni}
                 </IonTitle>
               </IonCol>
               <IonItemDivider />

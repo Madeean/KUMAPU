@@ -12,6 +12,8 @@ import {
   IonHeader,
   IonIcon,
   IonPage,
+  IonRefresher,
+  IonRefresherContent,
   IonRow,
   IonSearchbar,
   IonText,
@@ -83,6 +85,9 @@ const PemilikHome: React.FC = () => {
           </IonToolbar>
         </IonHeader>
         <IonContent>
+          <IonRefresher slot="fixed" onIonRefresh={getData}>
+            <IonRefresherContent></IonRefresherContent>
+          </IonRefresher>
           <IonGrid>
             <IonRow></IonRow>
           </IonGrid>
