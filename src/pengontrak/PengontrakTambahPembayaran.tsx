@@ -16,6 +16,7 @@ import {
   IonSelectOption,
   IonTitle,
   IonToolbar,
+  useIonLoading,
 } from "@ionic/react";
 import React, { useEffect, useState } from "react";
 import "./PengontrakTambahPembayaran.css";
@@ -27,6 +28,8 @@ import axios from "axios";
 import { useHistory } from "react-router";
 
 const PengontrakTambahPembayaran: React.FC = () => {
+  const [present, dismiss] = useIonLoading();
+
   const [name, setName] = useState<string>();
   const [namaKontrakan, setNamaKontrakan] = useState<string>();
   const role = "pengontrak";
@@ -88,6 +91,8 @@ const PengontrakTambahPembayaran: React.FC = () => {
   const tambahPembayaranUrl = url + "bayar";
 
   const tambahPembayaran = () => {
+    present({ message: "Loading...", spinner: "circles" });
+
     const bodyForm = new FormData();
     bodyForm.append("nama_pengontrak", name!);
     bodyForm.append("role", role);
@@ -109,6 +114,7 @@ const PengontrakTambahPembayaran: React.FC = () => {
       })
       .catch((error) => {
         console.log(error);
+        dismiss();
       });
   };
 

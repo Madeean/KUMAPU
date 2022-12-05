@@ -9,6 +9,8 @@ import {
   IonIcon,
   IonItem,
   IonPage,
+  IonRefresher,
+  IonRefresherContent,
   IonRow,
   IonText,
   IonTitle,
@@ -70,6 +72,9 @@ const PengontrakHome: React.FC = () => {
   };
 
   const getdata = async (token: String) => {
+    if (token == null) {
+      history.push("/login");
+    }
     axios
       .get(historyPembayaranUrl, {
         headers: {
@@ -119,6 +124,9 @@ const PengontrakHome: React.FC = () => {
           </IonToolbar>
         </IonHeader>
         <IonContent>
+          <IonRefresher slot="fixed" onIonRefresh={getDataNama}>
+            <IonRefresherContent></IonRefresherContent>
+          </IonRefresher>
           <IonGrid>
             <IonRow>
               <IonCol>

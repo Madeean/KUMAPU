@@ -14,6 +14,8 @@ import {
   IonRow,
   IonCol,
   IonButton,
+  IonRefresher,
+  IonRefresherContent,
 } from "@ionic/react";
 import { search } from "ionicons/icons";
 import React, { useEffect, useState } from "react";
@@ -108,6 +110,9 @@ const PengontrakRiwayatPembayaran: React.FC = () => {
             <IonInput placeholder="Cari riwayat pembayaran"></IonInput>
           </IonItem>
         </div>
+        <IonRefresher slot="fixed" onIonRefresh={getDataNama}>
+          <IonRefresherContent></IonRefresherContent>
+        </IonRefresher>
 
         {data?.map((item) => (
           <div className="card-riwayat-pembayaran-pengontrak" key={item.id}>
