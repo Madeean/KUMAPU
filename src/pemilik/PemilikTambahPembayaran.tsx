@@ -17,6 +17,7 @@ import {
   IonSelectOption,
   IonTitle,
   IonToolbar,
+  useIonLoading,
 } from "@ionic/react";
 import axios from "axios";
 import localforage from "localforage";
@@ -26,6 +27,8 @@ import { url } from "../App";
 import ImageAdd from "../image/bx_image-add.png";
 import "./PemilikTambahPembayaran.css";
 const PemilikTambahPembayaran: React.FC = () => {
+  const [present, dismiss] = useIonLoading();
+
   const history = useHistory();
   const [bulan, setBulan] = useState<string>();
   const [namaPengontrak, setNamaPengontrak] = useState<string>();
@@ -89,6 +92,8 @@ const PemilikTambahPembayaran: React.FC = () => {
   }, []);
 
   const bayar = () => {
+    present({ message: "Loading...", spinner: "circles" });
+
     const role = "pemilik";
     const formData = new FormData();
     formData.append("bulan", bulan!);
@@ -111,6 +116,7 @@ const PemilikTambahPembayaran: React.FC = () => {
       })
       .catch((err) => {
         console.log(err);
+        dismiss();
       });
   };
 

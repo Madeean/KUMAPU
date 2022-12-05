@@ -13,6 +13,7 @@ import {
   IonTitle,
   IonToolbar,
   useIonActionSheet,
+  useIonLoading,
 } from "@ionic/react";
 import React, { useEffect, useRef, useState } from "react";
 import "./PemilikDetailPengontrak.css";
@@ -26,6 +27,7 @@ import axios from "axios";
 import { cloudUpload, trash } from "ionicons/icons";
 
 const PemilikDetailPengontrak: React.FC = () => {
+  const [muncul, hapus] = useIonLoading();
   const detailPengontrakId = useParams<{ detailPengontrakId: string }>()
     .detailPengontrakId;
   const [tokenSP, setTokenSP] = useState<string>();
@@ -109,6 +111,8 @@ const PemilikDetailPengontrak: React.FC = () => {
   }
 
   const hapusPengontrak = async () => {
+    muncul({ message: "Loading...", spinner: "circles" });
+
     const token = await localforage.getItem("token");
     setTokenSP(token?.toString());
 
@@ -122,6 +126,7 @@ const PemilikDetailPengontrak: React.FC = () => {
       .then((response) => {})
       .catch((error) => {
         console.log(error);
+        hapus();
       });
 
     history.push("/pemilik/order/daftarorangngontrak");

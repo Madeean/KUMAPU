@@ -10,6 +10,7 @@ import {
   IonPage,
   IonTitle,
   IonToolbar,
+  useIonLoading,
 } from "@ionic/react";
 import localforage from "localforage";
 import React, { useEffect, useRef, useState } from "react";
@@ -21,6 +22,8 @@ import axios from "axios";
 import { useHistory } from "react-router";
 
 const PemilikEditProfile: React.FC = () => {
+  const [present, dismiss] = useIonLoading();
+
   const history = useHistory();
   const NameRef = useRef<HTMLIonInputElement>(null);
   const NamaKontrakanRef = useRef<HTMLIonInputElement>(null);
@@ -48,6 +51,8 @@ const PemilikEditProfile: React.FC = () => {
   const UrlEditProfile = url + "edit-profile";
 
   const editProfile = () => {
+    present({ message: "Loading...", spinner: "circles" });
+
     var bodyFormData = new FormData();
     bodyFormData.append("name", NameRef.current!.value?.toString()!);
     bodyFormData.append(
@@ -74,6 +79,7 @@ const PemilikEditProfile: React.FC = () => {
       })
       .catch(function (error) {
         console.log(error);
+        dismiss();
       });
   };
 

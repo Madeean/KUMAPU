@@ -42,11 +42,11 @@ const PemilikHome: React.FC = () => {
 
   const getData = async () => {
     const tokenSP = await localforage.getItem("token");
-    const name = await localforage.getItem("name");
+    const nameSP = await localforage.getItem("name");
     // This code runs once the value has been loaded
     // from the offline store.
 
-    Promise.all([tokenSP, name]).then((values) => {
+    Promise.all([tokenSP, nameSP]).then((values) => {
       setToken(values[0]?.toString());
       setName(values[1]?.toString());
     });

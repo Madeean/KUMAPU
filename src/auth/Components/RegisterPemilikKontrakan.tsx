@@ -6,6 +6,8 @@ import {
   IonItem,
   IonLabel,
   IonRow,
+  useIonAlert,
+  useIonLoading,
 } from "@ionic/react";
 import axios from "axios";
 import localforage from "localforage";
@@ -14,6 +16,8 @@ import { useHistory } from "react-router";
 import { url } from "../../App";
 
 const RegisterPemilikKontrakan: React.FC = () => {
+  const [present, dismiss] = useIonLoading();
+  const [presentAlert] = useIonAlert();
   const history = useHistory();
   const namaRef = useRef<HTMLIonInputElement>(null);
   const emailRef = useRef<HTMLIonInputElement>(null);
@@ -24,6 +28,8 @@ const RegisterPemilikKontrakan: React.FC = () => {
   let registerUrl = url + "register";
 
   const registerHandler = () => {
+    present({ message: "Loading...", spinner: "circles" });
+
     var bodyformm = new FormData();
     bodyformm.append("name", namaRef.current!.value!.toString());
     bodyformm.append("email", emailRef.current!.value!.toString());
@@ -51,6 +57,11 @@ const RegisterPemilikKontrakan: React.FC = () => {
       })
       .catch((error) => {
         console.log(error);
+        dismiss();
+        presentAlert({
+          header: "register gagal, silahkan pakai data lain",
+          buttons: ["OK"],
+        });
       });
   };
 

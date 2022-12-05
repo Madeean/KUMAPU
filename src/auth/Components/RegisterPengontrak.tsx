@@ -9,6 +9,8 @@ import {
   IonRow,
   IonSelect,
   IonSelectOption,
+  useIonAlert,
+  useIonLoading,
 } from "@ionic/react";
 import React, { useEffect, useRef, useState } from "react";
 import "./RegisterPengontrak.css";
@@ -21,8 +23,9 @@ import localforage from "localforage";
 import { useHistory } from "react-router";
 
 const RegisterPengontrak: React.FC = () => {
+  const [presentAlert] = useIonAlert();
   const history = useHistory();
-
+  const [present, dismiss] = useIonLoading();
   const [namaKontrakan, setNamaKontrakan] = React.useState<[]>();
 
   const nameRef = useRef<HTMLIonInputElement>(null);
@@ -59,6 +62,7 @@ const RegisterPengontrak: React.FC = () => {
   const registerUrl = url + "register";
 
   const registerHandler = () => {
+    present({ message: "Loading...", spinner: "circles" });
     var bodyformm = new FormData();
     bodyformm.append("name", nameRef.current!.value!.toString());
     bodyformm.append("email", emailRef.current!.value!.toString());
@@ -101,6 +105,11 @@ const RegisterPengontrak: React.FC = () => {
       })
       .catch((error) => {
         console.log(error);
+        dismiss();
+        presentAlert({
+          header: "register gagal, silahkan pakai data lain",
+          buttons: ["OK"],
+        });
       });
   };
 

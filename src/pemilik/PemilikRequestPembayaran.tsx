@@ -15,6 +15,7 @@ import {
   IonRefresherContent,
   IonTitle,
   IonToolbar,
+  useIonLoading,
 } from "@ionic/react";
 
 import { url } from "../App";
@@ -23,6 +24,8 @@ import axios from "axios";
 import { useHistory } from "react-router";
 
 const PemilikRequestPembayaran: React.FC = () => {
+  const [present, dismiss] = useIonLoading();
+
   const [token, setToken] = useState<string>();
   const [data, setData] = useState<any[]>();
 
@@ -62,6 +65,8 @@ const PemilikRequestPembayaran: React.FC = () => {
   const history = useHistory();
 
   const TolakPembayaran = (id: any) => {
+    present({ message: "Loading...", spinner: "circles" });
+
     const UrlTolakPembayaran = url + "tolak-pembayaran/" + id;
     axios
       .post(
@@ -80,9 +85,12 @@ const PemilikRequestPembayaran: React.FC = () => {
       })
       .catch((error) => {
         console.log(error);
+        dismiss();
       });
   };
   const TerimaPembayaran = (id: any) => {
+    present({ message: "Loading...", spinner: "circles" });
+
     const UrlTolakPembayaran = url + "terima-pembayaran/" + id;
     axios
       .post(
@@ -101,6 +109,7 @@ const PemilikRequestPembayaran: React.FC = () => {
       })
       .catch((error) => {
         console.log(error);
+        dismiss();
       });
   };
 
@@ -117,6 +126,9 @@ const PemilikRequestPembayaran: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
+        <IonRefresher slot="fixed" onIonRefresh={getData}>
+          <IonRefresherContent></IonRefresherContent>
+        </IonRefresher>
         {data?.map((item) => (
           <IonCard color="secondary" className="ion-margin-top" key={item.id}>
             <IonCardHeader>

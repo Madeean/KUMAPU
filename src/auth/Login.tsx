@@ -11,6 +11,8 @@ import {
   IonButton,
   IonItemDivider,
   IonImg,
+  useIonLoading,
+  useIonAlert,
 } from "@ionic/react";
 import logo from "../image/SplashScreen.png";
 import "./Login.css";
@@ -20,11 +22,14 @@ import * as localforage from "localforage";
 import { useHistory } from "react-router";
 
 const Login: React.FC = () => {
+  const [presentAlert] = useIonAlert();
   const history = useHistory();
+  const [present, dismiss] = useIonLoading();
   const emailRef = useRef<HTMLIonInputElement>(null);
   const passwordRef = useRef<HTMLIonInputElement>(null);
   let urlLogin = url + "login";
   const login = async () => {
+    present({ message: "Loading...", spinner: "circles" });
     let email = emailRef.current?.value;
     let password = passwordRef.current?.value;
     var bodyFormData = new FormData();
@@ -32,17 +37,18 @@ const Login: React.FC = () => {
     bodyFormData.append("password", password?.toString()!);
     axios
       .post(urlLogin, bodyFormData)
-      .then((response) => {
-        localforage.setItem("email", response.data.user.email);
-        localforage.setItem("token", response.data.token);
-        localforage.setItem("name", response.data.user.name);
-        localforage.setItem("foto_muka", response.data.user.foto_muka);
-        localforage.setItem("umur", response.data.user.umur);
-        localforage.setItem(
+      .then(async (response) => {
+        console.log(response.data);
+        await localforage.setItem("email", response.data.user.email);
+        await localforage.setItem("token", response.data.token);
+        await localforage.setItem("name", response.data.user.name);
+        await localforage.setItem("foto_muka", response.data.user.foto_muka);
+        await localforage.setItem("umur", response.data.user.umur);
+        await localforage.setItem(
           "nama_kontrakan",
           response.data.user.nama_kontrakan
         );
-        localforage.setItem("rooms", response.data.user.rooms);
+        await localforage.setItem("rooms", response.data.user.rooms);
         if (response.data.user.role == "pengontrak") {
           history.push("/pengontrak");
         } else {
@@ -51,6 +57,11 @@ const Login: React.FC = () => {
       })
       .catch((error) => {
         console.log(error);
+        dismiss();
+        presentAlert({
+          header: "Email atau Password salah",
+          buttons: ["OK"],
+        });
       });
   };
 

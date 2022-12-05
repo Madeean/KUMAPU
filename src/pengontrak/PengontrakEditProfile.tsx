@@ -10,6 +10,7 @@ import {
   IonPage,
   IonTitle,
   IonToolbar,
+  useIonLoading,
 } from "@ionic/react";
 import axios from "axios";
 import localforage from "localforage";
@@ -20,6 +21,8 @@ import { url } from "../App";
 import "./PengontrakEditProfile.css";
 
 const PengontrakEditProfile: React.FC = () => {
+  const [present, dismiss] = useIonLoading();
+
   const history = useHistory();
   const nameRef = useRef<HTMLIonInputElement>(null);
   const emailRef = useRef<HTMLIonInputElement>(null);
@@ -49,6 +52,7 @@ const PengontrakEditProfile: React.FC = () => {
   const editProfileUrl = url + "edit-profile-pengontrak";
 
   const editProfileHandler = () => {
+    present({ message: "Loading...", spinner: "circles" });
     const name = nameRef.current!.value;
     const email = emailRef.current!.value;
     const umur = umurRef.current!.value;
@@ -73,6 +77,7 @@ const PengontrakEditProfile: React.FC = () => {
       })
       .catch((response) => {
         console.log(response);
+        dismiss();
       });
   };
 
