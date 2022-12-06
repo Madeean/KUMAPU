@@ -15,6 +15,7 @@ import {
   IonRefresherContent,
   IonTitle,
   IonToolbar,
+  RefresherEventDetail,
   useIonLoading,
 } from "@ionic/react";
 
@@ -81,6 +82,7 @@ const PemilikRequestPembayaran: React.FC = () => {
       )
       .then((response) => {
         // reload page
+        dismiss();
         getData();
       })
       .catch((error) => {
@@ -105,12 +107,18 @@ const PemilikRequestPembayaran: React.FC = () => {
       )
       .then((response) => {
         // reload page
+        dismiss();
         getData();
       })
       .catch((error) => {
         console.log(error);
         dismiss();
       });
+  };
+
+  const refresh = (event: CustomEvent<RefresherEventDetail>) => {
+    getPembayaran(token?.toString()!);
+    event.detail.complete();
   };
 
   return (
@@ -126,7 +134,7 @@ const PemilikRequestPembayaran: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <IonRefresher slot="fixed" onIonRefresh={getData}>
+        <IonRefresher slot="fixed" onIonRefresh={refresh}>
           <IonRefresherContent></IonRefresherContent>
         </IonRefresher>
         {data?.map((item) => (

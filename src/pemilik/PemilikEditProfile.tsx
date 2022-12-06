@@ -68,14 +68,24 @@ const PemilikEditProfile: React.FC = () => {
           Authorization: "Bearer " + token,
         },
       })
-      .then(function (response) {
-        localforage.setItem("name", NameRef.current!.value?.toString()!);
-        localforage.setItem(
+      .then(async function (response) {
+        await localforage.removeItem("name");
+        await localforage.removeItem("nama_kontrakan");
+        await localforage.removeItem("rooms");
+
+        await localforage.setItem("name", NameRef.current!.value?.toString()!);
+        await localforage.setItem(
           "nama_kontrakan",
           NamaKontrakanRef.current!.value?.toString()!
         );
-        localforage.setItem("rooms", RoomsRef.current!.value?.toString()!);
+        await localforage.setItem(
+          "rooms",
+          RoomsRef.current!.value?.toString()!
+        );
+        dismiss();
+
         history.push("/pemilik/profile");
+        window.location.reload();
       })
       .catch(function (error) {
         console.log(error);

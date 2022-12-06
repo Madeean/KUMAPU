@@ -112,6 +112,8 @@ const PemilikTambahPembayaran: React.FC = () => {
         },
       })
       .then((res) => {
+        dismiss();
+
         history.push("/pemilik/pembayaran-berhasil");
       })
       .catch((err) => {

@@ -123,7 +123,9 @@ const PemilikDetailPengontrak: React.FC = () => {
           Authorization: "Bearer " + token,
         },
       })
-      .then((response) => {})
+      .then((response) => {
+        hapus();
+      })
       .catch((error) => {
         console.log(error);
         hapus();

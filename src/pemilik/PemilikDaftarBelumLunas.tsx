@@ -14,6 +14,7 @@ import {
   IonRefresherContent,
   IonTitle,
   IonToolbar,
+  RefresherEventDetail,
 } from "@ionic/react";
 import localforage from "localforage";
 import React, { useEffect, useState } from "react";
@@ -50,6 +51,11 @@ const PemilikDaftarBelumLunas: React.FC = () => {
     getData();
   }, []);
 
+  const refresh = (event: CustomEvent<RefresherEventDetail>) => {
+    getData();
+    event.detail.complete();
+  };
+
   return (
     <IonPage>
       <IonHeader>
@@ -63,7 +69,7 @@ const PemilikDaftarBelumLunas: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <IonRefresher slot="fixed" onIonRefresh={getData}>
+        <IonRefresher slot="fixed" onIonRefresh={refresh}>
           <IonRefresherContent></IonRefresherContent>
         </IonRefresher>
         {data?.map((item) => (
