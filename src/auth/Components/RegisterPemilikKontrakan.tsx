@@ -53,6 +53,10 @@ const RegisterPemilikKontrakan: React.FC = () => {
           "nama_kontrakan",
           response.data.user.nama_kontrakan
         );
+        localforage.setItem("rooms", response.data.user.rooms);
+
+        dismiss();
+
         history.push("/pemilik");
       })
       .catch((error) => {

@@ -49,6 +49,8 @@ const Login: React.FC = () => {
           response.data.user.nama_kontrakan
         );
         await localforage.setItem("rooms", response.data.user.rooms);
+        dismiss();
+
         if (response.data.user.role == "pengontrak") {
           history.push("/pengontrak");
         } else {

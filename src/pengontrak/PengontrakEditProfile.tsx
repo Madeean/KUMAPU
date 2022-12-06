@@ -30,18 +30,29 @@ const PengontrakEditProfile: React.FC = () => {
 
   const [token, setToken] = useState<string>("");
 
-  const getData = () => {
-    localforage.getItem("name").then((value: any) => {
-      nameRef.current!.value = value.toString();
-    });
-    localforage.getItem("email").then((value: any) => {
-      emailRef.current!.value = value.toString();
-    });
-    localforage.getItem("umur").then((value: any) => {
-      umurRef.current!.value = value.toString();
-    });
-    localforage.getItem("token").then((value: any) => {
-      setToken(value);
+  const getData = async () => {
+    // await localforage.getItem("name").then((value: any) => {
+    //   nameRef.current!.value = value.toString();
+    // });
+    // localforage.getItem("email").then((value: any) => {
+    //   emailRef.current!.value = value.toString();
+    // });
+    // localforage.getItem("umur").then((value: any) => {
+    //   umurRef.current!.value = value.toString();
+    // });
+    // localforage.getItem("token").then((value: any) => {
+    //   setToken(value);
+    // });
+    const nameSP = await localforage.getItem("name");
+    const emailSP = await localforage.getItem("email");
+    const umurSP = await localforage.getItem("umur");
+    const tokenSP = await localforage.getItem("token");
+
+    Promise.all([nameSP, emailSP, umurSP, tokenSP]).then((values: any) => {
+      nameRef.current!.value = values[0].toString();
+      emailRef.current!.value = values[1].toString();
+      umurRef.current!.value = values[2].toString();
+      setToken(values[3].toString());
     });
   };
 
@@ -67,13 +78,17 @@ const PengontrakEditProfile: React.FC = () => {
           Authorization: "Bearer " + token,
         },
       })
-      .then((response) => {
-        localforage.setItem("email", response.data.user.email);
-        localforage.setItem("token", response.data.token);
-        localforage.setItem("name", response.data.user.name);
-        localforage.setItem("foto_muka", response.data.user.foto_muka);
-        localforage.setItem("umur", response.data.user.umur);
+      .then(async (response) => {
+        await localforage.removeItem("name");
+        await localforage.removeItem("email");
+        await localforage.removeItem("umur");
+
+        await localforage.setItem("email", response.data.user.email);
+        await localforage.setItem("name", response.data.user.name);
+        await localforage.setItem("umur", response.data.user.umur);
+        dismiss();
         history.push("/pengontrak/profile");
+        window.location.reload();
       })
       .catch((response) => {
         console.log(response);

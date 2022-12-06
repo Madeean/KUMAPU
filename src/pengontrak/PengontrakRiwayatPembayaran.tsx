@@ -16,6 +16,7 @@ import {
   IonButton,
   IonRefresher,
   IonRefresherContent,
+  RefresherEventDetail,
 } from "@ionic/react";
 import { search } from "ionicons/icons";
 import React, { useEffect, useState } from "react";
@@ -30,6 +31,7 @@ const PengontrakRiwayatPembayaran: React.FC = () => {
   const history = useHistory();
   const [token, setToken] = useState<string>();
   const [data, setData] = useState<any[]>();
+  const [searchValue, setSearchValue] = useState("");
 
   const getDataNama = async () => {
     try {
@@ -88,6 +90,11 @@ const PengontrakRiwayatPembayaran: React.FC = () => {
     getDataNama();
   }, []);
 
+  const refresh = (event: CustomEvent<RefresherEventDetail>) => {
+    getDataNama();
+    event.detail.complete();
+  };
+
   return (
     <IonPage>
       <IonHeader className="ion-no-border">
@@ -107,39 +114,82 @@ const PengontrakRiwayatPembayaran: React.FC = () => {
             <IonLabel>
               <IonIcon src={search} />
             </IonLabel>
-            <IonInput placeholder="Cari riwayat pembayaran"></IonInput>
+            <IonInput
+              placeholder="Cari riwayat pembayaran"
+              onIonChange={(e) => setSearchValue(e.detail.value!)}
+            ></IonInput>
           </IonItem>
         </div>
-        <IonRefresher slot="fixed" onIonRefresh={getDataNama}>
+        <IonRefresher slot="fixed" onIonRefresh={refresh}>
           <IonRefresherContent></IonRefresherContent>
         </IonRefresher>
 
-        {data?.map((item) => (
-          <div className="card-riwayat-pembayaran-pengontrak" key={item.id}>
-            <IonGrid>
-              <IonRow>
-                <IonCol>
-                  <IonTitle>{item.user[0].name}</IonTitle>
-                </IonCol>
-              </IonRow>
-              <IonRow>
-                <IonCol size="6">
-                  <IonTitle>{item.user[0].alamat_kontrakan_sekarang}</IonTitle>
-                </IonCol>
-                <IonCol className="ion-text-center">
-                  <IonButton
-                    routerLink={"/pengontrak/detail-transaksi/" + item.id}
-                  >
-                    Detail transaksi
-                  </IonButton>
-                </IonCol>
-              </IonRow>
-              <IonTitle className="ion-text-center">
-                {item.tanggal_bayar}
-              </IonTitle>
-            </IonGrid>
-          </div>
-        ))}
+        {searchValue == ""
+          ? data?.map((item) => (
+              <div className="card-riwayat-pembayaran-pengontrak" key={item.id}>
+                <IonGrid>
+                  <IonRow>
+                    <IonCol>
+                      <IonTitle>{item.user[0].name}</IonTitle>
+                    </IonCol>
+                  </IonRow>
+                  <IonRow>
+                    <IonCol size="6">
+                      <IonTitle>
+                        {item.user[0].alamat_kontrakan_sekarang}
+                      </IonTitle>
+                    </IonCol>
+                    <IonCol className="ion-text-center">
+                      <IonButton
+                        routerLink={"/pengontrak/detail-transaksi/" + item.id}
+                      >
+                        Detail transaksi
+                      </IonButton>
+                    </IonCol>
+                  </IonRow>
+                  <IonTitle className="ion-text-center">
+                    {item.tanggal_bayar}
+                  </IonTitle>
+                </IonGrid>
+              </div>
+            ))
+          : data
+              ?.filter((item) =>
+                item.user[0].name
+                  .toLowerCase()
+                  .includes(searchValue.toLowerCase())
+              )
+              .map((item) => (
+                <div
+                  className="card-riwayat-pembayaran-pengontrak"
+                  key={item.id}
+                >
+                  <IonGrid>
+                    <IonRow>
+                      <IonCol>
+                        <IonTitle>{item.user[0].name}</IonTitle>
+                      </IonCol>
+                    </IonRow>
+                    <IonRow>
+                      <IonCol size="6">
+                        <IonTitle>
+                          {item.user[0].alamat_kontrakan_sekarang}
+                        </IonTitle>
+                      </IonCol>
+                      <IonCol className="ion-text-center">
+                        <IonButton
+                          routerLink={"/pengontrak/detail-transaksi/" + item.id}
+                        >
+                          Detail transaksi
+                        </IonButton>
+                      </IonCol>
+                    </IonRow>
+                    <IonTitle className="ion-text-center">
+                      {item.tanggal_bayar}
+                    </IonTitle>
+                  </IonGrid>
+                </div>
+              ))}
       </IonContent>
     </IonPage>
   );

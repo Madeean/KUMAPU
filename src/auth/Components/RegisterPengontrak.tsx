@@ -100,6 +100,7 @@ const RegisterPengontrak: React.FC = () => {
           "nama_kontrakan",
           response.data.user.nama_kontrakan
         );
+        dismiss();
 
         history.push("/pengontrak");
       })

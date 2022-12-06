@@ -20,6 +20,7 @@ import {
   IonText,
   IonTitle,
   IonToolbar,
+  RefresherEventDetail,
 } from "@ionic/react";
 import React, { useEffect, useState } from "react";
 import { listOutline } from "ionicons/icons";
@@ -68,6 +69,11 @@ const PemilikDaftarOrangNgontrak: React.FC = () => {
     getData();
   }, []);
 
+  const refresh = (event: CustomEvent<RefresherEventDetail>) => {
+    getData();
+    event.detail.complete();
+  };
+
   return (
     <IonPage>
       <IonHeader>
@@ -81,7 +87,7 @@ const PemilikDaftarOrangNgontrak: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <IonRefresher slot="fixed" onIonRefresh={getData}>
+        <IonRefresher slot="fixed" onIonRefresh={refresh}>
           <IonRefresherContent></IonRefresherContent>
         </IonRefresher>
         <IonItem lines="none">

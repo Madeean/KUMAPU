@@ -15,6 +15,7 @@ import {
   IonText,
   IonTitle,
   IonToolbar,
+  RefresherEventDetail,
 } from "@ionic/react";
 import { add, refresh } from "ionicons/icons";
 import localforage from "localforage";
@@ -112,6 +113,11 @@ const PengontrakHome: React.FC = () => {
     getDataNama();
   }, []);
 
+  const refreshPage = (event: CustomEvent<RefresherEventDetail>) => {
+    getdata(token?.toString()!);
+    event.detail.complete();
+  };
+
   return (
     <>
       <IonPage>
@@ -124,7 +130,7 @@ const PengontrakHome: React.FC = () => {
           </IonToolbar>
         </IonHeader>
         <IonContent>
-          <IonRefresher slot="fixed" onIonRefresh={getDataNama}>
+          <IonRefresher slot="fixed" onIonRefresh={refreshPage}>
             <IonRefresherContent></IonRefresherContent>
           </IonRefresher>
           <IonGrid>

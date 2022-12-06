@@ -19,6 +19,7 @@ import {
   IonText,
   IonTitle,
   IonToolbar,
+  RefresherEventDetail,
 } from "@ionic/react";
 import axios from "axios";
 import { refresh, add } from "ionicons/icons";
@@ -37,6 +38,7 @@ const PemilikHome: React.FC = () => {
   const [name, setName] = useState<string>();
   const [token, setToken] = useState<string>();
   const [data, setData] = useState<any[]>();
+  const [searchValue, setSearchValue] = useState("");
 
   const historyPembayaranUrl = url + "get-pembayaran-diterima-pemilik";
 
@@ -72,6 +74,11 @@ const PemilikHome: React.FC = () => {
     getData();
   }, []);
 
+  const refresh = (event: CustomEvent<RefresherEventDetail>) => {
+    getdata(token?.toString()!);
+    event.detail.complete();
+  };
+
   return (
     <>
       <IonPage>
@@ -81,11 +88,15 @@ const PemilikHome: React.FC = () => {
               <IonText>Hello,</IonText>
               <h5>{name}</h5>
             </IonTitle>
-            <IonSearchbar animated={true} placeholder="Cari Orang Kontrakan" />
+            <IonSearchbar
+              animated={true}
+              placeholder="Cari Orang Kontrakan"
+              onIonChange={(e) => setSearchValue(e.detail.value!)}
+            />
           </IonToolbar>
         </IonHeader>
         <IonContent>
-          <IonRefresher slot="fixed" onIonRefresh={getData}>
+          <IonRefresher slot="fixed" onIonRefresh={refresh}>
             <IonRefresherContent></IonRefresherContent>
           </IonRefresher>
           <IonGrid>
@@ -102,25 +113,49 @@ const PemilikHome: React.FC = () => {
               <h5>Kampung dadap No.5</h5>
             </IonGrid>
           </IonCard> */}
-          {data &&
-            data.map((item) => (
-              <IonCard color="secondary" key={item.id}>
-                <IonCardHeader>
-                  <IonCardTitle>{item.nama_pengontrak}</IonCardTitle>
-                  <IonCardSubtitle>
-                    {item.user[0].alamat_kontrakan_sekarang}
-                  </IonCardSubtitle>
-                </IonCardHeader>
+          {searchValue == ""
+            ? data?.map((item) => (
+                <IonCard color="secondary" key={item.id}>
+                  <IonCardHeader>
+                    <IonCardTitle>{item.nama_pengontrak}</IonCardTitle>
+                    <IonCardSubtitle>
+                      {item.user[0].alamat_kontrakan_sekarang}
+                    </IonCardSubtitle>
+                  </IonCardHeader>
 
-                <IonCardContent className="ion-text-center">
-                  <IonButton
-                    routerLink={"/pemilik/detail-transaksi/" + item.id}
-                  >
-                    Detail transaksi
-                  </IonButton>
-                </IonCardContent>
-              </IonCard>
-            ))}
+                  <IonCardContent className="ion-text-center">
+                    <IonButton
+                      routerLink={"/pemilik/detail-transaksi/" + item.id}
+                    >
+                      Detail transaksi
+                    </IonButton>
+                  </IonCardContent>
+                </IonCard>
+              ))
+            : data
+                ?.filter((item) =>
+                  item.nama_pengontrak
+                    .toLowerCase()
+                    .includes(searchValue.toLowerCase())
+                )
+                .map((item) => (
+                  <IonCard color="secondary" key={item.id}>
+                    <IonCardHeader>
+                      <IonCardTitle>{item.nama_pengontrak}</IonCardTitle>
+                      <IonCardSubtitle>
+                        {item.user[0].alamat_kontrakan_sekarang}
+                      </IonCardSubtitle>
+                    </IonCardHeader>
+
+                    <IonCardContent className="ion-text-center">
+                      <IonButton
+                        routerLink={"/pemilik/detail-transaksi/" + item.id}
+                      >
+                        Detail transaksi
+                      </IonButton>
+                    </IonCardContent>
+                  </IonCard>
+                ))}
 
           {/* <IonCard color="secondary">
             <IonCardHeader>

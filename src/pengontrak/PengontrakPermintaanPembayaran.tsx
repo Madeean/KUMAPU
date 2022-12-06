@@ -9,6 +9,7 @@ import {
   IonRow,
   IonTitle,
   IonToolbar,
+  RefresherEventDetail,
 } from "@ionic/react";
 import axios from "axios";
 import localforage from "localforage";
@@ -76,6 +77,11 @@ const PengontrakPermintaanPembayaran: React.FC = () => {
     getToken();
   }, []);
 
+  const refresh = (event: CustomEvent<RefresherEventDetail>) => {
+    getPermintaan(token?.toString()!);
+    event.detail.complete();
+  };
+
   return (
     <IonPage>
       <IonHeader>
@@ -86,7 +92,7 @@ const PengontrakPermintaanPembayaran: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <IonRefresher slot="fixed" onIonRefresh={getToken}>
+        <IonRefresher slot="fixed" onIonRefresh={refresh}>
           <IonRefresherContent></IonRefresherContent>
         </IonRefresher>
         {data.map((item: any) => (
