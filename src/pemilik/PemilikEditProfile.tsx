@@ -85,7 +85,6 @@ const PemilikEditProfile: React.FC = () => {
         dismiss();
 
         history.push("/pemilik/profile");
-        window.location.reload();
       })
       .catch(function (error) {
         console.log(error);
