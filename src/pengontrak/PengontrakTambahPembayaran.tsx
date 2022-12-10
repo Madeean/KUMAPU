@@ -134,26 +134,64 @@ const PengontrakTambahPembayaran: React.FC = () => {
 
   const kirimNotif = async () => {
     const url = `https://fcm.googleapis.com/fcm/send`;
-    const body = {
+    // const body = {
+    //   to: tokenPemilik?.toString(),
+    //   notification: {
+    //     title: "Pembayaran",
+    //     body: `Pembayaran dari ${name}`,
+    //   },
+    // };
+
+    // axios
+    //   .post(
+    //     url,
+    //     {
+    //       to: tokenPemilik?.toString(),
+    //       notification: {
+    //         title: "Pembayaran",
+    //         body: `Pembayaran dari ${name}`,
+    //       },
+    //     },
+    //     {
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //         Authorization:
+    //           "key=AAAA04w9D_o:APA91bFXZjR5R6QICmIkVlU4YKOlBG6_fIvS3swMeWfF1PH-kYWgQVZpbcBdhmR71_J0JHNa-mCGOak1N5wbGMVtWmh_8hltnb5aRouTvzDxiBOj1Pwjan5OS5F5Yd80WHlV1rz_rEU1",
+    //       },
+    //     }
+    //   )
+    //   .then((response) => {
+    //     Toast.show({ text: "notif berhasil dikirim" });
+    //   })
+    //   .catch((error) => {
+    //     Toast.show({ text: "notif gagal dikirim" });
+    //   });
+
+    var data = JSON.stringify({
       to: tokenPemilik?.toString(),
       notification: {
         title: "Pembayaran",
-        body: `Pembayaran dari ${name}`,
+        body: "Pembayaran dari pengontrak " + name?.toString(),
       },
+    });
+
+    var config = {
+      method: "post",
+      url: "https://fcm.googleapis.com/fcm/send",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization:
+          "key=AAAA04w9D_o:APA91bFXZjR5R6QICmIkVlU4YKOlBG6_fIvS3swMeWfF1PH-kYWgQVZpbcBdhmR71_J0JHNa-mCGOak1N5wbGMVtWmh_8hltnb5aRouTvzDxiBOj1Pwjan5OS5F5Yd80WHlV1rz_rEU1",
+      },
+      data: data,
     };
-    axios
-      .post(url, body, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization:
-            "key=AAAA04w9D_o:APA91bFXZjR5R6QICmIkVlU4YKOlBG6_fIvS3swMeWfF1PH-kYWgQVZpbcBdhmR71_J0JHNa-mCGOak1N5wbGMVtWmh_8hltnb5aRouTvzDxiBOj1Pwjan5OS5F5Yd80WHlV1rz_rEU1",
-        },
+
+    axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
       })
-      .then((response) => {
-        Toast.show({ text: "notif berhasil dikirim" });
-      })
-      .catch((error) => {
-        Toast.show({ text: "notif gagal dikirim" });
+      .catch(function (error) {
+        console.log(error);
       });
   };
 
