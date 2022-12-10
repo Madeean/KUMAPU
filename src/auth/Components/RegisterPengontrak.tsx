@@ -21,12 +21,15 @@ import axios from "axios";
 import { Camera, CameraResultType, CameraSource } from "@capacitor/camera";
 import localforage from "localforage";
 import { useHistory } from "react-router";
+import { PushNotifications, Token } from "@capacitor/push-notifications";
+import { Toast } from "@capacitor/toast";
 
 const RegisterPengontrak: React.FC = () => {
   const [presentAlert] = useIonAlert();
   const history = useHistory();
   const [present, dismiss] = useIonLoading();
   const [namaKontrakan, setNamaKontrakan] = React.useState<[]>();
+  const [token, setToken] = useState<string>();
 
   const nameRef = useRef<HTMLIonInputElement>(null);
   const emailRef = useRef<HTMLIonInputElement>(null);
@@ -44,6 +47,38 @@ const RegisterPengontrak: React.FC = () => {
 
   const namaKontrakanUrl = url + "get-nama-kontrakan";
 
+  const getToken = () => {
+    PushNotifications.checkPermissions().then((res) => {
+      if (res.receive !== "granted") {
+        PushNotifications.requestPermissions().then((res) => {
+          if (res.receive === "denied") {
+            // Toast.show({ text: "Push Notification permission denied" });
+          } else {
+            // Toast.show({ text: "Push Notification permission granted" });
+            register();
+          }
+        });
+      } else {
+        register();
+      }
+    });
+  };
+
+  const register = () => {
+    PushNotifications.register();
+
+    // On success, we should be able to receive notifications
+    PushNotifications.addListener("registration", (token: Token) => {
+      // Toast.show({ text: `push registration success ${token.value}` });
+      setToken(token.value);
+    });
+
+    // Some issue with our setup and push will not work
+    PushNotifications.addListener("registrationError", (error: any) => {
+      alert("Error on registration: " + JSON.stringify(error));
+    });
+  };
+
   const getNamaKontrakan = () => {
     axios
       .get(namaKontrakanUrl)
@@ -57,6 +92,7 @@ const RegisterPengontrak: React.FC = () => {
 
   useEffect(() => {
     getNamaKontrakan();
+    getToken();
   }, []);
 
   const registerUrl = url + "register";
@@ -82,6 +118,7 @@ const RegisterPengontrak: React.FC = () => {
       "harga_perbulan",
       hargaPerbulan.current!.value!.toString()
     );
+    bodyformm.append("tokenFCM", token!);
     bodyformm.append("foto_muka", selectedFile as File);
 
     axios
@@ -96,6 +133,7 @@ const RegisterPengontrak: React.FC = () => {
         localforage.setItem("name", response.data.user.name);
         localforage.setItem("foto_muka", response.data.user.foto_muka);
         localforage.setItem("umur", response.data.user.umur);
+        localforage.setItem("tokenFCM", response.data.user.tokenFCM);
         localforage.setItem(
           "nama_kontrakan",
           response.data.user.nama_kontrakan

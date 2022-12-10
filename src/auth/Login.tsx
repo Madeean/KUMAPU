@@ -44,6 +44,7 @@ const Login: React.FC = () => {
         await localforage.setItem("name", response.data.user.name);
         await localforage.setItem("foto_muka", response.data.user.foto_muka);
         await localforage.setItem("umur", response.data.user.umur);
+        await localforage.setItem("tokenFCM", response.data.user.tokenFCM);
         await localforage.setItem(
           "nama_kontrakan",
           response.data.user.nama_kontrakan

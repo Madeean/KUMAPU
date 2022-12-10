@@ -26,6 +26,7 @@ import Register from "./auth/Register";
 import PengontrakTab from "./pengontrak/PengontrakTab";
 import PemilikTab from "./pemilik/PemilikTab";
 import * as localforage from "localforage";
+import "./firebaseConfig";
 
 setupIonicReact();
 

@@ -26,6 +26,12 @@ import { Camera, CameraResultType, CameraSource } from "@capacitor/camera";
 import { url } from "../App";
 import axios from "axios";
 import { useHistory } from "react-router";
+import { Toast } from "@capacitor/toast";
+import {
+  ActionPerformed,
+  PushNotifications,
+  PushNotificationSchema,
+} from "@capacitor/push-notifications";
 
 const PengontrakTambahPembayaran: React.FC = () => {
   const [present, dismiss] = useIonLoading();
@@ -43,6 +49,8 @@ const PengontrakTambahPembayaran: React.FC = () => {
   }>();
   const [selectedFile, setSelectedFile] = useState<File>();
   const [token, setToken] = useState<string>();
+  const [tokenFCM, setTokenFCM] = useState<string>();
+  const [tokenPemilik, settokenPemilik] = useState<string>();
 
   const current = new Date();
   const tanggal_bayar = `${current.getDate()}-${
@@ -72,16 +80,119 @@ const PengontrakTambahPembayaran: React.FC = () => {
     });
   };
 
-  const getData = () => {
-    localforage.getItem("name").then((value: any) => {
-      setName(value.toString());
+  const getData = async () => {
+    // localforage.getItem("name").then((value: any) => {
+    //   setName(value.toString());
+    // });
+    // localforage.getItem("token").then((value: any) => {
+    //   setToken(value.toString());
+    // });
+    // localforage.getItem("nama_kontrakan").then((value: any) => {
+    //   setNamaKontrakan(value.toString());
+    // });
+    // localforage.getItem("tokenFCM").then((value: any) => {
+    //   setTokenFCM(value.toString());
+    // });
+    const name = await localforage.getItem("name");
+    const tokenSP = await localforage.getItem("token");
+    const nama_kontrakan = await localforage.getItem("nama_kontrakan");
+    const tokenFCM = await localforage.getItem("tokenFCM");
+
+    Promise.all([name, tokenSP, nama_kontrakan, tokenFCM]).then(
+      (values: any) => {
+        setName(values[0].toString());
+        setToken(values[1].toString());
+        setNamaKontrakan(values[2].toString());
+        setTokenFCM(values[3].toString());
+      }
+    );
+
+    if (tokenSP != null) {
+      getPemilik(tokenSP.toString(), nama_kontrakan?.toString()!);
+      // Toast.show({ text: "token pemilik " + tokenSP });
+    } else {
+      getData();
+    }
+  };
+
+  const getPemilik = async (tokensp: string, namakontrakan: string) => {
+    const url = `https://madeekan.madee.my.id/api/get-pemilik/${namakontrakan}`;
+    await axios
+      .get(url, {
+        headers: {
+          Authorization: "Bearer " + tokensp,
+        },
+      })
+      .then((response) => {
+        // Toast.show({ text: "token pemilik " + response.data.user.tokenFCM });
+        settokenPemilik(response.data.user.tokenFCM);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const kirimNotif = async () => {
+    const url = `https://fcm.googleapis.com/fcm/send`;
+    // const body = {
+    //   to: tokenPemilik?.toString(),
+    //   notification: {
+    //     title: "Pembayaran",
+    //     body: `Pembayaran dari ${name}`,
+    //   },
+    // };
+
+    // axios
+    //   .post(
+    //     url,
+    //     {
+    //       to: tokenPemilik?.toString(),
+    //       notification: {
+    //         title: "Pembayaran",
+    //         body: `Pembayaran dari ${name}`,
+    //       },
+    //     },
+    //     {
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //         Authorization:
+    //           "key=AAAA04w9D_o:APA91bFXZjR5R6QICmIkVlU4YKOlBG6_fIvS3swMeWfF1PH-kYWgQVZpbcBdhmR71_J0JHNa-mCGOak1N5wbGMVtWmh_8hltnb5aRouTvzDxiBOj1Pwjan5OS5F5Yd80WHlV1rz_rEU1",
+    //       },
+    //     }
+    //   )
+    //   .then((response) => {
+    //     Toast.show({ text: "notif berhasil dikirim" });
+    //   })
+    //   .catch((error) => {
+    //     Toast.show({ text: "notif gagal dikirim" });
+    //   });
+
+    var data = JSON.stringify({
+      to: tokenPemilik?.toString(),
+      notification: {
+        title: "Pembayaran",
+        body: "Pembayaran dari pengontrak " + name?.toString(),
+      },
     });
-    localforage.getItem("token").then((value: any) => {
-      setToken(value.toString());
-    });
-    localforage.getItem("nama_kontrakan").then((value: any) => {
-      setNamaKontrakan(value.toString());
-    });
+
+    var config = {
+      method: "post",
+      url: "https://fcm.googleapis.com/fcm/send",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization:
+          "key=AAAA04w9D_o:APA91bFXZjR5R6QICmIkVlU4YKOlBG6_fIvS3swMeWfF1PH-kYWgQVZpbcBdhmR71_J0JHNa-mCGOak1N5wbGMVtWmh_8hltnb5aRouTvzDxiBOj1Pwjan5OS5F5Yd80WHlV1rz_rEU1",
+      },
+      data: data,
+    };
+
+    axios(config)
+      .then(function (response) {
+        // console.log(JSON.stringify(response.data));
+      })
+      .catch(function (error) {
+        // console.log(error);
+      });
   };
 
   useEffect(() => {
@@ -110,6 +221,7 @@ const PengontrakTambahPembayaran: React.FC = () => {
         },
       })
       .then((response) => {
+        kirimNotif();
         dismiss();
         history.push("/pengontrak/pembayaran-berhasil");
       })
