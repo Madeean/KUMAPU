@@ -52,9 +52,9 @@ const RegisterPengontrak: React.FC = () => {
       if (res.receive !== "granted") {
         PushNotifications.requestPermissions().then((res) => {
           if (res.receive === "denied") {
-            Toast.show({ text: "Push Notification permission denied" });
+            // Toast.show({ text: "Push Notification permission denied" });
           } else {
-            Toast.show({ text: "Push Notification permission granted" });
+            // Toast.show({ text: "Push Notification permission granted" });
             register();
           }
         });
@@ -69,7 +69,7 @@ const RegisterPengontrak: React.FC = () => {
 
     // On success, we should be able to receive notifications
     PushNotifications.addListener("registration", (token: Token) => {
-      Toast.show({ text: `push registration success ${token.value}` });
+      // Toast.show({ text: `push registration success ${token.value}` });
       setToken(token.value);
     });
 

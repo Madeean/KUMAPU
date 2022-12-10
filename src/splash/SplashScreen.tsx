@@ -22,9 +22,9 @@ const SplashScreen: React.FC = () => {
       if (res.receive !== "granted") {
         PushNotifications.requestPermissions().then((res) => {
           if (res.receive === "denied") {
-            Toast.show({ text: "Push Notification permission denied" });
+            // Toast.show({ text: "Push Notification permission denied" });
           } else {
-            Toast.show({ text: "Push Notification permission granted" });
+            // Toast.show({ text: "Push Notification permission granted" });
             register();
           }
         });
@@ -42,12 +42,12 @@ const SplashScreen: React.FC = () => {
 
     // On success, we should be able to receive notifications
     PushNotifications.addListener("registration", (token: Token) => {
-      Toast.show({ text: `push registration success ${token.value}` });
+      // Toast.show({ text: `push registration success ${token.value}` });
     });
 
     // Some issue with our setup and push will not work
     PushNotifications.addListener("registrationError", (error: any) => {
-      alert("Error on registration: " + JSON.stringify(error));
+      // alert("Error on registration: " + JSON.stringify(error));
     });
 
     // Show us the notification payload if the app is open on our device

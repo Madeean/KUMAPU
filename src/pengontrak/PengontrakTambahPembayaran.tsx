@@ -124,7 +124,7 @@ const PengontrakTambahPembayaran: React.FC = () => {
         },
       })
       .then((response) => {
-        Toast.show({ text: "token pemilik " + response.data.user.tokenFCM });
+        // Toast.show({ text: "token pemilik " + response.data.user.tokenFCM });
         settokenPemilik(response.data.user.tokenFCM);
       })
       .catch((error) => {
@@ -188,10 +188,10 @@ const PengontrakTambahPembayaran: React.FC = () => {
 
     axios(config)
       .then(function (response) {
-        console.log(JSON.stringify(response.data));
+        // console.log(JSON.stringify(response.data));
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
       });
   };
 
