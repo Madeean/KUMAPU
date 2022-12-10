@@ -1,3 +1,5 @@
+import { PushNotifications, Token } from "@capacitor/push-notifications";
+import { Toast } from "@capacitor/toast";
 import {
   IonButton,
   IonCol,
@@ -11,7 +13,7 @@ import {
 } from "@ionic/react";
 import axios from "axios";
 import localforage from "localforage";
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useHistory } from "react-router";
 import { url } from "../../App";
 
@@ -24,6 +26,44 @@ const RegisterPemilikKontrakan: React.FC = () => {
   const passwordRef = useRef<HTMLIonInputElement>(null);
   const namaKontrakanRef = useRef<HTMLIonInputElement>(null);
   const ruanganRef = useRef<HTMLIonInputElement>(null);
+
+  const [token, setToken] = useState<string>();
+
+  useEffect(() => {
+    getToken();
+  }, []);
+
+  const getToken = () => {
+    PushNotifications.checkPermissions().then((res) => {
+      if (res.receive !== "granted") {
+        PushNotifications.requestPermissions().then((res) => {
+          if (res.receive === "denied") {
+            Toast.show({ text: "Push Notification permission denied" });
+          } else {
+            Toast.show({ text: "Push Notification permission granted" });
+            register();
+          }
+        });
+      } else {
+        register();
+      }
+    });
+  };
+
+  const register = () => {
+    PushNotifications.register();
+
+    // On success, we should be able to receive notifications
+    PushNotifications.addListener("registration", (token: Token) => {
+      Toast.show({ text: `push registration success ${token.value}` });
+      setToken(token.value);
+    });
+
+    // Some issue with our setup and push will not work
+    PushNotifications.addListener("registrationError", (error: any) => {
+      alert("Error on registration: " + JSON.stringify(error));
+    });
+  };
 
   let registerUrl = url + "register";
 
@@ -40,6 +80,7 @@ const RegisterPemilikKontrakan: React.FC = () => {
     );
     bodyformm.append("rooms", ruanganRef.current!.value!.toString());
     bodyformm.append("role", "pemilik");
+    bodyformm.append("tokenFCM", token!);
 
     axios
       .post(registerUrl, bodyformm)
@@ -54,6 +95,7 @@ const RegisterPemilikKontrakan: React.FC = () => {
           response.data.user.nama_kontrakan
         );
         localforage.setItem("rooms", response.data.user.rooms);
+        localforage.setItem("tokenFCM", response.data.user.tokenFCM);
 
         dismiss();
 

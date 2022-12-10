@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "908590911482",
+    "project_id": "pushnotif-cross",
+    "storage_bucket": "pushnotif-cross.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:908590911482:android:9b8294a5eeebf657581e43",
+        "android_client_info": {
+          "package_name": "umn.ac.kumapu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "908590911482-kh60cdhdadmff8u16n9c69kp19p2sk2g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjOsbpau_3PxVY-b4e4R8k4ty7x5rOTpw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "908590911482-kh60cdhdadmff8u16n9c69kp19p2sk2g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
