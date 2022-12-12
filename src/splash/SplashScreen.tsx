@@ -97,7 +97,7 @@ const SplashScreen: React.FC = () => {
           <div className="centered-element">
             <img src={logo} alt="centered" />
             <h1 className="text-gede ion-text-center">
-              Welome to
+              Welcome to
               <br />
               KUMAPU
             </h1>

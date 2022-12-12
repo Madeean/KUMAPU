@@ -4,11 +4,7 @@
 }
 
 .background-pemilik-edit-profile {
-  --background: linear-gradient(
-    rgba(7, 163, 178, 1) 0%,
-    rgba(80, 213, 183, 0.7) 50%,
-    rgba(172, 192, 254, 0.7) 100%
-  );
+  --background: #e6e6e6;
 }
 
 .btn-edit-profile-pemilik {

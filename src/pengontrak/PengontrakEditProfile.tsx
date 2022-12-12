@@ -87,7 +87,7 @@ const PengontrakEditProfile: React.FC = () => {
         await localforage.setItem("name", response.data.user.name);
         await localforage.setItem("umur", response.data.user.umur);
         dismiss();
-        history.push("/pengontrak/profile");
+        history.goBack();
       })
       .catch((response) => {
         console.log(response);
