@@ -30,20 +30,17 @@ const PengontrakTab: React.FC = () => {
     <IonTabs>
       <IonRouterOutlet>
         <Redirect exact from="/pengontrak" to="/pengontrak/home" />
-        <Route exact path="/pengontrak/home" component={PengontrakHome} />
+        <Route path="/pengontrak/home" component={PengontrakHome} />
         <Route
-          exact
           path="/pengontrak/permintaan-pembayaran"
           component={PengontrakPermintaanPembayaran}
         />
         <Route exact path="/pengontrak/profile" component={PengontrakProfile} />
         <Route
-          exact
           path="/pengontrak/profile/edit"
           component={PengontrakEditProfile}
         />
         <Route
-          exact
           path="/pengontrak/riwayat-pembayaran"
           component={PengontrakRiwayatPembayaran}
         />
@@ -52,12 +49,10 @@ const PengontrakTab: React.FC = () => {
           component={PengontrakTambahPembayaran}
         />
         <Route
-          exact
           path="/pengontrak/pembayaran-berhasil"
           component={PengontrakPembayaranBerhasil}
         />
         <Route
-          exact
           path="/pengontrak/detail-transaksi/:detailTransaksiId"
           component={PengontrakDetailTransaksi}
         />

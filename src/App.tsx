@@ -37,8 +37,8 @@ const App: React.FC = () => (
     <IonReactRouter>
       <IonRouterOutlet>
         <Route path="/" component={SplashScreen} exact />
-        <Route path="/login" component={Login} exact />
-        <Route path="/register" component={Register} exact />
+        <Route path="/login" component={Login} />
+        <Route path="/register" component={Register} />
         <Route path="/pengontrak" component={PengontrakTab} />
         <Route path="/pemilik" component={PemilikTab} />
       </IonRouterOutlet>
