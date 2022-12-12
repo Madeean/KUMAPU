@@ -54,9 +54,7 @@ const PemilikRequestPembayaran: React.FC = () => {
       .then((response) => {
         setData(response.data.data);
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => {});
   };
 
   useEffect(() => {
@@ -86,7 +84,6 @@ const PemilikRequestPembayaran: React.FC = () => {
         getData();
       })
       .catch((error) => {
-        console.log(error);
         dismiss();
       });
   };
@@ -111,7 +108,6 @@ const PemilikRequestPembayaran: React.FC = () => {
         getData();
       })
       .catch((error) => {
-        console.log(error);
         dismiss();
       });
   };

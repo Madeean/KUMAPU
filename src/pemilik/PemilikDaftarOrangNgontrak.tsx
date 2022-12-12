@@ -60,9 +60,7 @@ const PemilikDaftarOrangNgontrak: React.FC = () => {
         SetJumlahOrang(response.data.user.length);
         setData(response.data.user);
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => {});
   };
 
   useEffect(() => {

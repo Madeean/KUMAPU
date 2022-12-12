@@ -60,9 +60,7 @@ const PemilikDetailPengontrak: React.FC = () => {
         setTanggalBergabung(response.data.user.created);
         setFotoMuka(response.data.user.foto_muka);
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => {});
   };
 
   const history = useHistory();
@@ -127,7 +125,6 @@ const PemilikDetailPengontrak: React.FC = () => {
         hapus();
       })
       .catch((error) => {
-        console.log(error);
         hapus();
       });
 

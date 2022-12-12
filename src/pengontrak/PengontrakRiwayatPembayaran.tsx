@@ -52,13 +52,8 @@ const PengontrakRiwayatPembayaran: React.FC = () => {
         .then((response) => {
           setData(response.data.data);
         })
-        .catch((response) => {
-          console.log(response);
-        });
-    } catch (err) {
-      // This code runs if there were any errors.
-      console.log(err);
-    }
+        .catch((response) => {});
+    } catch (err) {}
 
     // setTimeout(() => {
     //   getHistoryPembayaran();

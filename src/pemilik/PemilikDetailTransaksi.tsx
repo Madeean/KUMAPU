@@ -58,7 +58,6 @@ const PemilikDetailTransaksi: React.FC = () => {
         },
       })
       .then((response) => {
-        console.log(response);
         setName(response.data.data.user[0].name);
         setAlamatKontrakan(
           response.data.data.user[0].alamat_kontrakan_sekarang
@@ -72,9 +71,7 @@ const PemilikDetailTransaksi: React.FC = () => {
         setBulan(response.data.data.bulan);
         setBuktiBayar(response.data.data.bukti_bayar);
       })
-      .catch((response) => {
-        console.log(response);
-      });
+      .catch((response) => {});
   };
 
   useEffect(() => {

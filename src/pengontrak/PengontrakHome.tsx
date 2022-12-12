@@ -62,10 +62,7 @@ const PengontrakHome: React.FC = () => {
       // .catch((response) => {
       //   console.log(response);
       // });
-    } catch (err) {
-      // This code runs if there were any errors.
-      console.log(err);
-    }
+    } catch (err) {}
 
     // setTimeout(() => {
     //   getHistoryPembayaran();
@@ -86,9 +83,7 @@ const PengontrakHome: React.FC = () => {
       .then((response) => {
         setData(response.data.data);
       })
-      .catch((response) => {
-        console.log(response);
-      });
+      .catch((response) => {});
   };
 
   // const getHistoryPembayaran = async () => {

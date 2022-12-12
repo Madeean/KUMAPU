@@ -42,9 +42,7 @@ const PemilikDaftarBelumLunas: React.FC = () => {
       .then((response) => {
         setData(response.data.data);
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => {});
   };
 
   useEffect(() => {

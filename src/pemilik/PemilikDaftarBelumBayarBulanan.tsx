@@ -61,9 +61,7 @@ const PemilikDaftarBelumBayarBulanan: React.FC = () => {
           setDataSemuaBelumBayar(response.data.data_yang_belum_bayar);
         }
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => {});
   };
 
   return (

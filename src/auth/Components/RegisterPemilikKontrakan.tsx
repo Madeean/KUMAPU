@@ -102,7 +102,6 @@ const RegisterPemilikKontrakan: React.FC = () => {
         history.push("/pemilik");
       })
       .catch((error) => {
-        console.log(error);
         dismiss();
         presentAlert({
           header: "register gagal, silahkan pakai data lain",

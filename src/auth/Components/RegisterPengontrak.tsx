@@ -85,9 +85,7 @@ const RegisterPengontrak: React.FC = () => {
       .then((response) => {
         setNamaKontrakan(response.data.user);
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => {});
   };
 
   useEffect(() => {
@@ -143,7 +141,6 @@ const RegisterPengontrak: React.FC = () => {
         history.push("/pengontrak");
       })
       .catch((error) => {
-        console.log(error);
         dismiss();
         presentAlert({
           header: "register gagal, silahkan pakai data lain",
