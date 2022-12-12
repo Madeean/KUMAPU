@@ -127,9 +127,7 @@ const PengontrakTambahPembayaran: React.FC = () => {
         // Toast.show({ text: "token pemilik " + response.data.user.tokenFCM });
         settokenPemilik(response.data.user.tokenFCM);
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => {});
   };
 
   const kirimNotif = async () => {
@@ -226,7 +224,6 @@ const PengontrakTambahPembayaran: React.FC = () => {
         history.push("/pengontrak/pembayaran-berhasil");
       })
       .catch((error) => {
-        console.log(error);
         dismiss();
       });
   };

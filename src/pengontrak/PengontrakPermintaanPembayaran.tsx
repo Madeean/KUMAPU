@@ -35,9 +35,7 @@ const PengontrakPermintaanPembayaran: React.FC = () => {
       } else {
         getToken();
       }
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
     return false;
   };
 
@@ -53,9 +51,7 @@ const PengontrakPermintaanPembayaran: React.FC = () => {
       .then((response) => {
         setData(response.data.data);
       })
-      .catch((response) => {
-        console.log(response);
-      });
+      .catch((response) => {});
   };
 
   // const getData = () => {

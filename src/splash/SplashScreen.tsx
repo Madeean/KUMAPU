@@ -35,8 +35,6 @@ const SplashScreen: React.FC = () => {
   };
 
   const register = async () => {
-    console.log("Initializing HomePage");
-
     // Register with Apple / Google to receive push via APNS/FCM
     PushNotifications.register();
 

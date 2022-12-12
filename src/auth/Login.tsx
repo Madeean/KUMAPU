@@ -38,7 +38,6 @@ const Login: React.FC = () => {
     axios
       .post(urlLogin, bodyFormData)
       .then(async (response) => {
-        console.log(response.data);
         await localforage.setItem("email", response.data.user.email);
         await localforage.setItem("token", response.data.token);
         await localforage.setItem("name", response.data.user.name);
@@ -59,7 +58,6 @@ const Login: React.FC = () => {
         }
       })
       .catch((error) => {
-        console.log(error);
         dismiss();
         presentAlert({
           header: "Email atau Password salah",

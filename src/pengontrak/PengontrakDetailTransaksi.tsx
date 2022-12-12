@@ -62,9 +62,7 @@ const PengontrakDetailTransaksi: React.FC = () => {
         setBulan(response.data.data.bulan);
         setBuktiBayar(response.data.data.bukti_bayar);
       })
-      .catch((response) => {
-        console.log(response);
-      });
+      .catch((response) => {});
   };
 
   useEffect(() => {

@@ -56,9 +56,7 @@ const PengontrakProfile: React.FC = () => {
         localforage.clear();
         history.push("/login");
       })
-      .catch((response) => {
-        console.log(response);
-      });
+      .catch((response) => {});
   };
 
   return (

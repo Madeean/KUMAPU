@@ -64,9 +64,7 @@ const PemilikProfile: React.FC = () => {
 
         history.push("/login");
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => {});
   };
 
   return (
